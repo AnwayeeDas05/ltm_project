@@ -229,7 +229,7 @@ function saveApiKey() {
   }
   updateEngineBadge();
   closeApiKeyModal();
-  addMessage('ai', `✨ **Connected to Google Gemini 3.5 Flash Live AI!** Queries are now processed with specialized system prompts for each module.`, false, 'gemini');
+  addMessage('ai', `✨ **Connected to Google Gemini 3.1 Flash Live AI!** Queries are now processed with specialized system prompts for each module.`, false, 'gemini');
 }
 
 function clearApiKey() {
@@ -247,7 +247,7 @@ function updateEngineBadge() {
   const dot = document.getElementById('engineDot');
   if (label && dot) {
     if (geminiApiKey && geminiApiKey !== 'OFFLINE') {
-      label.textContent = 'Gemini 3.5 Flash';
+      label.textContent = 'Gemini 3.1 Flash';
       dot.style.background = 'var(--cyan)';
       dot.style.boxShadow = '0 0 8px var(--cyan)';
     } else {
@@ -306,7 +306,7 @@ function addMessage(sender, text, instant = false, engineSource = null) {
     if (engineSource === 'gemini') {
       metaBadge = `
         <div class="msg-meta-tag badge-gemini">
-          <span>✨ Gemini 3.5 Flash Live AI</span>
+          <span>✨ Gemini 3.1 Flash Live AI</span>
           <span class="badge-prompt-tag">Prompt: ${modules[currentModule].name}</span>
         </div>`;
     } else if (engineSource === 'smart') {
@@ -655,42 +655,57 @@ async function callGeminiAPI(userQuery) {
     contents.push({ role: 'user', parts: [{ text: userQuery }] });
   }
 
-  // Model: Google Gemini 3.5 Flash Lite (ultra-fast, responsive)
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${encodeURIComponent(geminiApiKey)}`;
-
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 16000);
+  // Model: Google Gemini 3.1 Flash
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash:generateContent?key=${encodeURIComponent(geminiApiKey)}`;
 
   let res;
-  try {
-    res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      signal: controller.signal,
-      body: JSON.stringify({
-        system_instruction: { parts: [{ text: systemInstruction }] },
-        contents,
-        generationConfig: {
-          temperature: 0.75,
-          maxOutputTokens: 1200,
-          topP: 0.95
-        }
-      })
-    });
-  } finally {
-    clearTimeout(timeoutId);
+  let retries = 3;
+  let delay = 1000;
+  let lastError = null;
+
+  for (let i = 0; i < retries; i++) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 25000); // Increased timeout to 25s
+
+    try {
+      res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: systemInstruction }] },
+          contents,
+          generationConfig: {
+            temperature: 0.75,
+            maxOutputTokens: 1200,
+            topP: 0.95
+          }
+        })
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData?.error?.message || `HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      const responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!responseText) throw new Error('Empty response from Gemini');
+
+      return responseText;
+    } catch (err) {
+      lastError = err;
+      console.warn(`Gemini API attempt ${i + 1} failed: ${err.message}`);
+      if (i < retries - 1) {
+        await new Promise(resolve => setTimeout(resolve, delay));
+        delay *= 2; // Exponential backoff
+      }
+    } finally {
+      clearTimeout(timeoutId);
+    }
   }
 
-  if (!res.ok) {
-    const errData = await res.json().catch(() => ({}));
-    throw new Error(errData?.error?.message || `HTTP ${res.status}`);
-  }
-
-  const data = await res.json();
-  const responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!responseText) throw new Error('Empty response from Gemini');
-
-  return responseText;
+  throw new Error(`Gemini API failed after ${retries} attempts. Last error: ${lastError.message}`);
 }
 
 
