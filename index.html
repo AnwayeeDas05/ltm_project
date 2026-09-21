@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Compass — AI Career & Placement Assistant</title>
+  <meta name="description" content="Campus Compass is an AI-powered student career guidance and placement preparation assistant that helps college students navigate their career journey with personalized insights." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <div class="nav-logo">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="18" stroke="url(#grad1)" stroke-width="2"/>
+            <path d="M20 4 L20 36 M4 20 L36 20" stroke="url(#grad1)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M20 4 L24 16 L20 14 L16 16 Z" fill="url(#grad1)"/>
+            <circle cx="20" cy="20" r="3" fill="url(#grad1)"/>
+            <defs>
+              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#6C3AFF"/>
+                <stop offset="100%" stop-color="#00FFC2"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="nav-title">Campus <span class="gradient-text">Compass</span></span>
+      </div>
+      <div class="nav-links">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#demo" class="nav-link">Live Demo</a>
+        <a href="#architecture" class="nav-link">Architecture</a>
+        <a href="#blueprint" class="nav-link">Blueprint</a>
+        <button class="btn-primary nav-cta" onclick="scrollToDemo()">Try Demo</button>
+      </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-orb hero-orb-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        AI-Powered · Real-Time · Personalized
+      </div>
+      <h1 class="hero-title">
+        Your AI-Powered<br/>
+        <span class="gradient-text">Career Navigator</span><br/>
+        for Campus Life
+      </h1>
+      <p class="hero-subtitle">
+        Campus Compass guides students from confusion to clarity — with personalized career roadmaps, 
+        real-time placement prep, resume critique, mock interviews, and skill gap analysis. 
+        All in one intelligent assistant.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary btn-large" onclick="scrollToDemo()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor"/></svg>
+          Launch Demo
+        </button>
+        <button class="btn-outline btn-large" onclick="document.getElementById('blueprint').scrollIntoView({behavior:'smooth'})">
+          View Blueprint
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-value">6</span>
+          <span class="stat-label">Core AI Modules</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value">15+</span>
+          <span class="stat-label">Use Cases Covered</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value">∞</span>
+          <span class="stat-label">Personalized Paths</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="phone-mockup">
+        <div class="phone-screen">
+          <div class="chat-preview">
+            <div class="chat-msg ai-msg">
+              <div class="msg-avatar">🤖</div>
+              <div class="msg-bubble">Hi! I'm <strong>Compass</strong>. What's your career goal today?</div>
+            </div>
+            <div class="chat-msg user-msg">
+              <div class="msg-bubble">I want to become a Data Scientist</div>
+            </div>
+            <div class="chat-msg ai-msg">
+              <div class="msg-avatar">🤖</div>
+              <div class="msg-bubble">
+                Great choice! Based on your profile, here's your <strong>personalized roadmap</strong> 🚀
+                <div class="roadmap-preview">
+                  <div class="road-step done">✅ Python Basics</div>
+                  <div class="road-step done">✅ Statistics</div>
+                  <div class="road-step active">⚡ ML Algorithms</div>
+                  <div class="road-step">🔒 Deep Learning</div>
+                </div>
+              </div>
+            </div>
+            <div class="typing-indicator">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Core Capabilities</span>
+        <h2 class="section-title">Everything a Student Needs,<br/><span class="gradient-text">Powered by AI</span></h2>
+        <p class="section-subtitle">Six intelligent modules working together to transform your campus-to-career journey</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card card-accent-purple" data-module="career">
+          <div class="feature-icon">🧭</div>
+          <h3>Career Path Navigator</h3>
+          <p>AI-driven career mapping based on your skills, interests, academic performance, and market trends. Get a clear, step-by-step roadmap.</p>
+          <div class="feature-tags">
+            <span class="tag">Skill Analysis</span>
+            <span class="tag">Roadmap Gen</span>
+            <span class="tag">Market Trends</span>
+          </div>
+          <div class="feature-arrow">→</div>
+        </div>
+        <div class="feature-card card-accent-blue" data-module="resume">
+          <div class="feature-icon">📝</div>
+          <h3>Resume Analyzer & Builder</h3>
+          <p>Upload your resume for instant AI critique. Get ATS optimization tips, content improvements, and role-specific tailoring suggestions.</p>
+          <div class="feature-tags">
+            <span class="tag">ATS Score</span>
+            <span class="tag">Auto-Fix</span>
+            <span class="tag">Templates</span>
+          </div>
+          <div class="feature-arrow">→</div>
+        </div>
+        <div class="feature-card card-accent-cyan" data-module="interview">
+          <div class="feature-icon">🎙️</div>
+          <h3>Mock Interview Coach</h3>
+          <p>Practice with an AI interviewer trained on real company question banks. Get instant feedback on answers, confidence, and body language cues.</p>
+          <div class="feature-tags">
+            <span class="tag">HR Rounds</span>
+            <span class="tag">Technical</span>
+            <span class="tag">Feedback</span>
+          </div>
+          <div class="feature-arrow">→</div>
+        </div>
+        <div class="feature-card card-accent-green" data-module="skill">
+          <div class="feature-icon">⚡</div>
+          <h3>Skill Gap Detector</h3>
+          <p>Compare your current skills against job descriptions. Get a precise gap analysis with curated learning resources, courses, and timelines.</p>
+          <div class="feature-tags">
+            <span class="tag">Gap Analysis</span>
+            <span class="tag">Resources</span>
+            <span class="tag">Timeline</span>
+          </div>
+          <div class="feature-arrow">→</div>
+        </div>
+        <div class="feature-card card-accent-orange" data-module="placement">
+          <div class="feature-icon">🏢</div>
+          <h3>Placement Tracker</h3>
+          <p>Track campus recruitment drives, set reminders, monitor application status, and get company-specific prep material — all in one dashboard.</p>
+          <div class="feature-tags">
+            <span class="tag">Drive Alerts</span>
+            <span class="tag">Company Prep</span>
+            <span class="tag">Status</span>
+          </div>
+          <div class="feature-arrow">→</div>
+        </div>
+        <div class="feature-card card-accent-pink" data-module="mentor">
+          <div class="feature-icon">🤝</div>
+          <h3>AI Mentor Network</h3>
+          <p>Connect with AI-matched alumni mentors, get referral assistance, and receive guidance from seniors who've walked the same path.</p>
+          <div class="feature-tags">
+            <span class="tag">Alumni Match</span>
+            <span class="tag">Referrals</span>
+            <span class="tag">Guidance</span>
+          </div>
+          <div class="feature-arrow">→</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section" id="demo">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Interactive Demo</span>
+        <h2 class="section-title">Experience <span class="gradient-text">Campus Compass</span> Live</h2>
+        <p class="section-subtitle">Try the AI assistant yourself — select a module and start a conversation</p>
+      </div>
+      <div class="demo-layout">
+        <div class="demo-sidebar">
+          <h4 class="sidebar-title">Select Module</h4>
+          <div class="module-list">
+            <button class="module-btn active" data-module="career" onclick="switchModule('career', this)">
+              <span class="module-icon">🧭</span>
+              <div>
+                <span class="module-name">Career Navigator</span>
+                <span class="module-desc">Plan your path</span>
+              </div>
+            </button>
+            <button class="module-btn" data-module="resume" onclick="switchModule('resume', this)">
+              <span class="module-icon">📝</span>
+              <div>
+                <span class="module-name">Resume Analyzer</span>
+                <span class="module-desc">Optimize your CV</span>
+              </div>
+            </button>
+            <button class="module-btn" data-module="interview" onclick="switchModule('interview', this)">
+              <span class="module-icon">🎙️</span>
+              <div>
+                <span class="module-name">Mock Interview</span>
+                <span class="module-desc">Practice questions</span>
+              </div>
+            </button>
+            <button class="module-btn" data-module="skill" onclick="switchModule('skill', this)">
+              <span class="module-icon">⚡</span>
+              <div>
+                <span class="module-name">Skill Gap Detector</span>
+                <span class="module-desc">Find missing skills</span>
+              </div>
+            </button>
+            <button class="module-btn" data-module="placement" onclick="switchModule('placement', this)">
+              <span class="module-icon">🏢</span>
+              <div>
+                <span class="module-name">Placement Tracker</span>
+                <span class="module-desc">Track drives</span>
+              </div>
+            </button>
+          </div>
+          <div class="sidebar-quick-actions">
+            <h4 class="sidebar-title">Quick Prompts</h4>
+            <div class="quick-prompt-list" id="quickPromptList"></div>
+          </div>
+        </div>
+        <div class="chat-container">
+          <div class="chat-header">
+            <div class="chat-header-info">
+              <div class="chat-avatar-pulse">
+                <div class="chat-avatar">CC</div>
+                <div class="pulse-ring"></div>
+              </div>
+              <div>
+                <h4 class="chat-name">Campus Compass AI</h4>
+                <span class="chat-status" id="chatStatus">● Active — Career Navigator Mode</span>
+              </div>
+            </div>
+            <button class="clear-chat-btn" onclick="clearChat()" title="Clear Chat">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <div class="chat-messages" id="chatMessages">
+            <!-- Messages inserted by JS -->
+          </div>
+          <div class="chat-input-area">
+            <div class="input-wrapper">
+              <textarea 
+                id="userInput" 
+                placeholder="Ask Campus Compass anything about your career..." 
+                rows="1"
+                onkeydown="handleKeyDown(event)"
+                oninput="autoResize(this)"
+              ></textarea>
+              <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="input-hint">Press <kbd>Enter</kbd> to send · <kbd>Shift+Enter</kbd> for new line</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture Section -->
+  <section class="architecture-section" id="architecture">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">System Design</span>
+        <h2 class="section-title">High-Level <span class="gradient-text">Architecture</span></h2>
+        <p class="section-subtitle">A microservices-based, cloud-native AI architecture designed for scale</p>
+      </div>
+      <div class="arch-diagram">
+        <div class="arch-layer layer-users">
+          <div class="layer-label">👥 Users</div>
+          <div class="arch-nodes">
+            <div class="arch-node">Student App<br/><small>React Native</small></div>
+            <div class="arch-node">Web Portal<br/><small>Next.js</small></div>
+            <div class="arch-node">Admin Panel<br/><small>React</small></div>
+          </div>
+        </div>
+        <div class="arch-arrow-row">
+          <div class="arch-arrow">↓ HTTPS/WSS</div>
+        </div>
+        <div class="arch-layer layer-gateway">
+          <div class="layer-label">🔐 API Gateway & Auth</div>
+          <div class="arch-nodes">
+            <div class="arch-node wide">Kong API Gateway · Firebase Auth · Rate Limiter · Load Balancer</div>
+          </div>
+        </div>
+        <div class="arch-arrow-row">
+          <div class="arch-arrow">↓ REST / GraphQL</div>
+        </div>
+        <div class="arch-layer layer-services">
+          <div class="layer-label">⚙️ Core AI Microservices</div>
+          <div class="arch-nodes">
+            <div class="arch-node service-node purple">Career<br/>Navigator<br/><small>FastAPI</small></div>
+            <div class="arch-node service-node blue">Resume<br/>Analyzer<br/><small>FastAPI</small></div>
+            <div class="arch-node service-node cyan">Interview<br/>Coach<br/><small>FastAPI</small></div>
+            <div class="arch-node service-node green">Skill Gap<br/>Detector<br/><small>FastAPI</small></div>
+            <div class="arch-node service-node orange">Placement<br/>Tracker<br/><small>FastAPI</small></div>
+          </div>
+        </div>
+        <div class="arch-arrow-row">
+          <div class="arch-arrow">↓ AI Model Layer</div>
+        </div>
+        <div class="arch-layer layer-ai">
+          <div class="layer-label">🤖 AI Engine</div>
+          <div class="arch-nodes">
+            <div class="arch-node ai-node">Gemini Pro<br/><small>Conversational AI</small></div>
+            <div class="arch-node ai-node">LangChain<br/><small>Orchestration</small></div>
+            <div class="arch-node ai-node">Pinecone<br/><small>Vector Store</small></div>
+            <div class="arch-node ai-node">NLP Pipeline<br/><small>spaCy + BERT</small></div>
+          </div>
+        </div>
+        <div class="arch-arrow-row">
+          <div class="arch-arrow">↓ Data Layer</div>
+        </div>
+        <div class="arch-layer layer-data">
+          <div class="layer-label">🗄️ Data & Infrastructure</div>
+          <div class="arch-nodes">
+            <div class="arch-node">PostgreSQL<br/><small>User Data</small></div>
+            <div class="arch-node">MongoDB<br/><small>Chat Logs</small></div>
+            <div class="arch-node">Redis<br/><small>Cache</small></div>
+            <div class="arch-node">Firebase<br/><small>Realtime</small></div>
+            <div class="arch-node">GCS<br/><small>File Storage</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="tech-stack-grid">
+        <div class="tech-category">
+          <h4>🎨 Frontend</h4>
+          <div class="tech-tags">
+            <span class="tech-tag">Next.js 14</span>
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">TailwindCSS</span>
+          </div>
+        </div>
+        <div class="tech-category">
+          <h4>⚙️ Backend</h4>
+          <div class="tech-tags">
+            <span class="tech-tag">FastAPI</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">GraphQL</span>
+            <span class="tech-tag">WebSockets</span>
+          </div>
+        </div>
+        <div class="tech-category">
+          <h4>🤖 AI/ML</h4>
+          <div class="tech-tags">
+            <span class="tech-tag">Gemini Pro</span>
+            <span class="tech-tag">LangChain</span>
+            <span class="tech-tag">Pinecone</span>
+            <span class="tech-tag">spaCy</span>
+          </div>
+        </div>
+        <div class="tech-category">
+          <h4>☁️ Cloud & DevOps</h4>
+          <div class="tech-tags">
+            <span class="tech-tag">GCP</span>
+            <span class="tech-tag">Kubernetes</span>
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blueprint Section -->
+  <section class="blueprint-section" id="blueprint">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Solution Blueprint</span>
+        <h2 class="section-title">Complete <span class="gradient-text">Design Blueprint</span></h2>
+      </div>
+      <div class="blueprint-tabs">
+        <button class="tab-btn active" onclick="switchTab('problem', this)">Problem Statement</button>
+        <button class="tab-btn" onclick="switchTab('usecases', this)">Use Cases</button>
+        <button class="tab-btn" onclick="switchTab('inputs', this)">Inputs & Outputs</button>
+        <button class="tab-btn" onclick="switchTab('benefits', this)">Benefits & Impact</button>
+        <button class="tab-btn" onclick="switchTab('future', this)">Future Roadmap</button>
+      </div>
+      <div class="blueprint-content">
+        <!-- Problem Tab -->
+        <div class="tab-panel active" id="tab-problem">
+          <div class="bp-grid">
+            <div class="bp-card highlight-card">
+              <div class="bp-icon">🎯</div>
+              <h3>Problem Statement</h3>
+              <p>Over <strong>60% of engineering graduates</strong> in India remain unplaced or underemployed due to a critical disconnect between academic curriculum and industry expectations. Students lack:</p>
+              <ul class="bp-list">
+                <li>Personalized career direction based on individual skill profiles</li>
+                <li>Real-time placement preparation resources</li>
+                <li>Accessible, 24/7 guidance without burdening counselors</li>
+                <li>Structured roadmaps for career switching or upskilling</li>
+              </ul>
+            </div>
+            <div class="bp-card">
+              <div class="bp-icon">👥</div>
+              <h3>Target Users</h3>
+              <div class="user-cards">
+                <div class="user-card">
+                  <span class="user-emoji">🎓</span>
+                  <strong>UG/PG Students</strong>
+                  <p>1st–4th year seeking career direction</p>
+                </div>
+                <div class="user-card">
+                  <span class="user-emoji">🔄</span>
+                  <strong>Career Switchers</strong>
+                  <p>Students pivoting to new domains</p>
+                </div>
+                <div class="user-card">
+                  <span class="user-emoji">📋</span>
+                  <strong>TPO Officers</strong>
+                  <p>Placement coordinators tracking drives</p>
+                </div>
+                <div class="user-card">
+                  <span class="user-emoji">🏫</span>
+                  <strong>Faculty Advisors</strong>
+                  <p>Mentors monitoring student progress</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Use Cases Tab -->
+        <div class="tab-panel" id="tab-usecases">
+          <div class="use-cases-grid">
+            <div class="uc-card">
+              <div class="uc-num">UC-01</div>
+              <h4>Career Path Discovery</h4>
+              <p>Student inputs interests and academic profile → AI generates multiple career paths with probability scores and market demand analysis.</p>
+              <div class="uc-actors">Actor: Student · System: Career Engine</div>
+            </div>
+            <div class="uc-card">
+              <div class="uc-num">UC-02</div>
+              <h4>Resume Intelligence</h4>
+              <p>Student uploads resume → AI scores it against ATS, suggests improvements, generates role-specific versions, and estimates shortlist probability.</p>
+              <div class="uc-actors">Actor: Student · System: NLP Resume Engine</div>
+            </div>
+            <div class="uc-card">
+              <div class="uc-num">UC-03</div>
+              <h4>Adaptive Mock Interviews</h4>
+              <p>Student selects company/role → AI conducts adaptive interview with follow-up questions, real-time scoring, and detailed post-session report.</p>
+              <div class="uc-actors">Actor: Student · System: Interview Engine</div>
+            </div>
+            <div class="uc-card">
+              <div class="uc-num">UC-04</div>
+              <h4>Skill Gap Analysis</h4>
+              <p>Student pastes job description → AI extracts required skills, cross-references with profile, generates prioritized learning plan with resources.</p>
+              <div class="uc-actors">Actor: Student · System: Skill Gap Engine</div>
+            </div>
+            <div class="uc-card">
+              <div class="uc-num">UC-05</div>
+              <h4>Placement Drive Intelligence</h4>
+              <p>TPO uploads company details → AI notifies eligible students, generates company-specific prep packs, tracks application status end-to-end.</p>
+              <div class="uc-actors">Actor: TPO, Student · System: Placement Engine</div>
+            </div>
+            <div class="uc-card">
+              <div class="uc-num">UC-06</div>
+              <h4>Alumni Mentor Matching</h4>
+              <p>Student requests mentorship → AI matches with alumni based on career domain, college branch, and mentor availability for 1:1 sessions.</p>
+              <div class="uc-actors">Actor: Student, Alumni · System: Mentor Engine</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inputs & Outputs Tab -->
+        <div class="tab-panel" id="tab-inputs">
+          <div class="io-table-container">
+            <table class="io-table">
+              <thead>
+                <tr>
+                  <th>Module</th>
+                  <th>User Inputs</th>
+                  <th>AI Processing</th>
+                  <th>Expected Outputs</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="io-badge purple">Career Navigator</span></td>
+                  <td>Skills, Interests, GPA, Branch, Career Goals</td>
+                  <td>LLM analysis + Market trend matching + Career graph traversal</td>
+                  <td>Ranked career paths, Roadmap steps, Timeline, Resource links</td>
+                </tr>
+                <tr>
+                  <td><span class="io-badge blue">Resume Analyzer</span></td>
+                  <td>Resume PDF/DOCX, Target Role, JD (optional)</td>
+                  <td>NLP parsing + ATS keyword matching + Content scoring</td>
+                  <td>ATS score, Keyword gaps, Improvement suggestions, Optimized sections</td>
+                </tr>
+                <tr>
+                  <td><span class="io-badge cyan">Mock Interview</span></td>
+                  <td>Company name, Role, Experience level</td>
+                  <td>Question generation + Answer evaluation + STAR framework scoring</td>
+                  <td>Q&A transcript, Confidence score, Sample ideal answers, Next topics</td>
+                </tr>
+                <tr>
+                  <td><span class="io-badge green">Skill Gap</span></td>
+                  <td>Job description text, Current skills, Level</td>
+                  <td>Skill extraction NLP + Gap computation + Resource curation</td>
+                  <td>Gap list with priority, Courses (free/paid), Study timeline, Progress tracker</td>
+                </tr>
+                <tr>
+                  <td><span class="io-badge orange">Placement Tracker</span></td>
+                  <td>Company details, Student profiles, CGPA filters</td>
+                  <td>Eligibility matching + Notification engine + Calendar integration</td>
+                  <td>Drive schedule, Eligible student list, Prep materials, Application status</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Benefits Tab -->
+        <div class="tab-panel" id="tab-benefits">
+          <div class="benefits-grid">
+            <div class="benefit-card">
+              <div class="benefit-icon">📈</div>
+              <h4>40% Higher Placement Rate</h4>
+              <p>Targeted preparation and skill alignment increases campus recruitment success rates significantly.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="benefit-icon">⏰</div>
+              <h4>24/7 Availability</h4>
+              <p>Students get instant guidance anytime without waiting for counselor appointments or office hours.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="benefit-icon">🎯</div>
+              <h4>Hyper-Personalization</h4>
+              <p>Every recommendation adapts to individual student profile, eliminating one-size-fits-all advice.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="benefit-icon">💰</div>
+              <h4>80% Cost Reduction</h4>
+              <p>Replaces expensive external career counseling services with an always-on AI at fraction of the cost.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="benefit-icon">📊</div>
+              <h4>Data-Driven Decisions</h4>
+              <p>TPOs and faculty get real-time analytics dashboards on student readiness and placement trends.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="benefit-icon">🔄</div>
+              <h4>Continuous Improvement</h4>
+              <p>AI learns from placement outcomes, continuously refining recommendations and interview strategies.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Future Roadmap Tab -->
+        <div class="tab-panel" id="tab-future">
+          <div class="roadmap-timeline">
+            <div class="timeline-item">
+              <div class="timeline-marker phase1">Phase 1</div>
+              <div class="timeline-content">
+                <h4>Q1 2025 — Foundation</h4>
+                <p>Core chat interface, Career Navigator, Resume Analyzer MVP. Single college pilot with 500 students.</p>
+                <div class="timeline-tags">
+                  <span>MVP</span><span>Pilot</span><span>Feedback Loop</span>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker phase2">Phase 2</div>
+              <div class="timeline-content">
+                <h4>Q2–Q3 2025 — Expansion</h4>
+                <p>Mock Interview engine, Skill Gap Detector, Placement Tracker, Mobile App launch across 10 colleges.</p>
+                <div class="timeline-tags">
+                  <span>Mobile</span><span>10 Colleges</span><span>Full Suite</span>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker phase3">Phase 3</div>
+              <div class="timeline-content">
+                <h4>Q4 2025 — Intelligence</h4>
+                <p>AI voice interviews, LinkedIn integration, Employer portal, Predictive placement analytics dashboard.</p>
+                <div class="timeline-tags">
+                  <span>Voice AI</span><span>LinkedIn API</span><span>Analytics</span>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker phase4">Phase 4</div>
+              <div class="timeline-content">
+                <h4>2026 — Platform</h4>
+                <p>Multi-lingual support, AR campus tours, Blockchain credential verification, National university network.</p>
+                <div class="timeline-tags">
+                  <span>Multilingual</span><span>AR/VR</span><span>Blockchain</span><span>National</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prompt Engineering Section -->
+  <section class="prompts-section" id="prompts">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Prompt Engineering Journal</span>
+        <h2 class="section-title">Iteration → <span class="gradient-text">Refinement</span> → Excellence</h2>
+        <p class="section-subtitle">Documenting our prompt engineering journey from raw ideas to precision instructions</p>
+      </div>
+      <div class="prompt-journey">
+        <div class="journey-step">
+          <div class="journey-num">01</div>
+          <div class="journey-content">
+            <h4>Initial Ideation Prompt</h4>
+            <div class="prompt-box v1">
+              <div class="prompt-version">v1.0 — Raw</div>
+              <code>"Create an AI assistant for students"</code>
+            </div>
+            <div class="iteration-arrow">↓ Observation: Too vague, generic response</div>
+            <div class="prompt-box v2">
+              <div class="prompt-version">v2.0 — Improved</div>
+              <code>"Design an AI assistant for engineering college students in India to help them with career guidance and placement preparation. Include specific use cases, target users, and key features."</code>
+            </div>
+            <div class="iteration-arrow">↓ Observation: Better scope, but missing context & constraints</div>
+            <div class="prompt-box v3">
+              <div class="prompt-version">v3.0 — Final</div>
+              <code>"You are a product strategist designing an AI-powered Career Guidance Assistant for engineering college students in Tier 1–3 Indian colleges. The system must address: (1) career path confusion, (2) poor placement readiness, (3) lack of 24/7 counselor access. Generate: use cases with actors, functional requirements, AI module descriptions, and measurable success metrics. Assume 500 concurrent users and mobile-first design."</code>
+            </div>
+          </div>
+        </div>
+        <div class="journey-step">
+          <div class="journey-num">02</div>
+          <div class="journey-content">
+            <h4>Architecture Design Prompt</h4>
+            <div class="prompt-box v1">
+              <div class="prompt-version">v1.0 — Raw</div>
+              <code>"What tech stack should I use for an AI chatbot?"</code>
+            </div>
+            <div class="iteration-arrow">↓ Learning: Need to specify scale, AI capabilities, constraints</div>
+            <div class="prompt-box v3">
+              <div class="prompt-version">v3.0 — Final</div>
+              <code>"Design a microservices architecture for an AI student assistant platform supporting 10,000+ students across 50 colleges. Requirements: (1) sub-200ms response time, (2) 99.9% uptime, (3) LLM integration for conversational AI, (4) real-time notifications, (5) file processing for resumes. Recommend: frontend framework, backend services, AI/ML stack, database choices, cloud provider, and deployment strategy. Justify each choice."</code>
+            </div>
+          </div>
+        </div>
+        <div class="journey-step">
+          <div class="journey-num">03</div>
+          <div class="journey-content">
+            <h4>Resume Analysis System Prompt</h4>
+            <div class="prompt-box v3">
+              <div class="prompt-version">v3.0 — Production</div>
+              <code>"You are an expert ATS (Applicant Tracking System) and senior HR specialist with 10+ years of experience in technical recruiting. Analyze the following student resume for the role of [ROLE] at [COMPANY]. Provide: (1) ATS compatibility score /100, (2) top 5 missing keywords from the JD, (3) section-by-section improvements (Summary, Experience, Skills, Projects), (4) overall shortlist probability percentage, (5) one-line power statement to replace the objective. Be specific, actionable, and empathetic to a student's limited experience."</code>
+            </div>
+          </div>
+        </div>
+        <div class="journey-step">
+          <div class="journey-num">04</div>
+          <div class="journey-content">
+            <h4>Mock Interview System Prompt</h4>
+            <div class="prompt-box v3">
+              <div class="prompt-version">v3.0 — Production</div>
+              <code>"You are [COMPANY]'s senior technical interviewer conducting a [ROLE] interview for a final-year engineering student. Start with an easy warm-up, progressively increase difficulty, ask follow-up questions based on their answers. After each response: score it /10 on Clarity, Technical Accuracy, and Structure. If the answer is weak, give a hint. After 5 questions, provide: overall performance score, top 3 improvement areas, and ideal sample answers for the 2 weakest responses. Maintain an encouraging yet professional tone."</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="nav-logo" style="width:32px;height:32px;">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="18" stroke="url(#grad2)" stroke-width="2"/>
+            <path d="M20 4 L20 36 M4 20 L36 20" stroke="url(#grad2)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M20 4 L24 16 L20 14 L16 16 Z" fill="url(#grad2)"/>
+            <circle cx="20" cy="20" r="3" fill="url(#grad2)"/>
+            <defs>
+              <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#6C3AFF"/>
+                <stop offset="100%" stop-color="#00FFC2"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span style="font-weight:700;font-size:1.2rem;">Campus <span class="gradient-text">Compass</span></span>
+      </div>
+      <p class="footer-tagline">Navigating every student's journey from campus to career.</p>
+      <div class="footer-meta">
+        <span>Built for the AI Assistant Challenge 2025</span>
+        <span>•</span>
+        <span>Solution Blueprint v1.0</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
