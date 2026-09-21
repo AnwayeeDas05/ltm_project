@@ -1,14 +1,15 @@
 # 📘 Prompt Engineering Journal
 ## Campus Compass — AI Career & Placement Guidance Assistant
-**Team Challenge:** AI Assistant for a Real-World Scenario  
+**Challenge:** AI Assistant for a Real-World Scenario  
 **Domain:** Student Career Guidance + Placement Preparation  
-**Date:** September 2025
+**Date:** September 2025  
+**AI Engine:** Google Gemini 2.0 Flash (live, multi-turn, system-prompted)
 
 ---
 
 ## Overview
 
-This journal documents every prompt used during the ideation, design, and refinement phases of building **Campus Compass** — an AI assistant that guides college students from career confusion to confident placement readiness.
+This journal documents every prompt used during the ideation, design, and refinement phases of building **Campus Compass** — an AI assistant that guides college students from career confusion to confident placement readiness. The final system prompts documented here are live in the production app, powering a real Gemini 2.0 Flash integration with multi-turn conversation memory.
 
 ---
 
@@ -292,4 +293,5 @@ All 4 production prompts are documented in Iterations 3.1–3.4 above with their
 
 ---
 
-*Prompt Engineering Journal — Campus Compass AI Challenge 2025*
+*Prompt Engineering Journal — Campus Compass | September 2025*  
+*All production system prompts are live in the app, powering Gemini 2.0 Flash with full multi-turn context.*

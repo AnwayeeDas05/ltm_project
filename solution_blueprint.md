@@ -3,7 +3,7 @@
 
 **Challenge:** Build an AI Assistant for a Real-World Scenario  
 **Domain:** Student Career Guidance + Placement Preparation  
-**Version:** 1.0 | **Date:** September 2025
+**Version:** 2.0 | **Date:** September 2025
 
 ---
 
@@ -34,12 +34,13 @@ Over **60% of engineering graduates** in India remain unplaced or underemployed 
 **Name:** Campus Compass  
 **Tagline:** *"Navigating every student's journey from campus to career."*
 
-Campus Compass is a **conversational AI assistant** powered by large language models (LLMs) that delivers personalized, real-time career guidance to college students. It integrates 6 intelligent modules that work together to take a student from initial career confusion to final placement — all through a natural language interface accessible on mobile and web.
+Campus Compass is a **conversational AI assistant** powered by Google Gemini 2.0 Flash that delivers personalized, real-time career guidance to college students. It integrates 5 intelligent modules covering career navigation, resume analysis, mock interviews, skill gap detection, and placement tracking — all through a natural language chat interface accessible in any browser.
 
 Unlike generic chatbots, Campus Compass:
 - **Adapts** to each student's unique profile (branch, CGPA, skills, interests)
-- **Learns** from placement outcomes to continuously improve recommendations
-- **Serves multiple stakeholders** — students, TPO officers, faculty advisors, and alumni mentors
+- **Remembers context** across the full conversation — no need to repeat yourself
+- **Works offline** via the Smart Engine fallback — no API key required to explore
+- **Runs everywhere** — a single HTML file, no install, no server, no account
 
 ---
 
@@ -58,9 +59,8 @@ Unlike generic chatbots, Campus Compass:
 
 | Persona | Description | Key Needs |
 |---------|-------------|-----------|
-| 📋 **TPO Officer** | Manages placement drives for 500+ students | Drive management, student tracking |
-| 🏫 **Faculty Advisor** | Department placement in-charge | Analytics, progress monitoring |
-| 🤝 **Alumni Mentor** | Wants to give back, limited time | Efficient 1:1 matching |
+| 📋 **TPO Officer** | Manages placement drives for 500+ students | Drive information, eligibility queries |
+| 🏫 **Faculty Advisor** | Department placement in-charge | Student readiness assessment |
 
 ---
 
@@ -68,21 +68,21 @@ Unlike generic chatbots, Campus Compass:
 
 | ID | Requirement | Priority |
 |----|-------------|----------|
-| FR-01 | System shall allow students to create profiles with academic and skill data | Must Have |
-| FR-02 | System shall generate personalized career path recommendations with roadmaps | Must Have |
-| FR-03 | System shall accept resume uploads (PDF/DOCX) and return ATS analysis | Must Have |
-| FR-04 | System shall conduct adaptive mock interview sessions for 50+ companies | Must Have |
-| FR-05 | System shall analyze job descriptions and generate skill gap reports | Must Have |
-| FR-06 | System shall notify students of relevant placement drives via push/email | Must Have |
-| FR-07 | System shall match students with alumni mentors based on career alignment | Should Have |
-| FR-08 | System shall maintain conversation history and context across sessions | Must Have |
-| FR-09 | System shall support both English and regional language responses | Should Have |
-| FR-10 | System shall provide a TPO dashboard for managing placement drives | Must Have |
-| FR-11 | System shall generate weekly progress reports for students | Should Have |
-| FR-12 | System shall integrate with LinkedIn for profile import | Could Have |
-| FR-13 | System shall provide voice-based interview practice | Could Have |
-| FR-14 | System shall track and display real-time placement statistics | Should Have |
-| FR-15 | System shall ensure GDPR/data privacy compliance | Must Have |
+| FR-01 | System shall generate personalized career path recommendations with roadmaps | Must Have |
+| FR-02 | System shall provide ATS resume analysis and improvement suggestions | Must Have |
+| FR-03 | System shall conduct adaptive mock interview sessions for 50+ companies | Must Have |
+| FR-04 | System shall analyze skill gaps and recommend learning resources | Must Have |
+| FR-05 | System shall provide placement drive schedules, eligibility, and prep tips | Must Have |
+| FR-06 | System shall maintain full conversation context across the session | Must Have |
+| FR-07 | System shall fall back to Smart Engine when no API key is provided | Must Have |
+| FR-08 | System shall store API key securely in browser localStorage only | Must Have |
+| FR-09 | System shall support markdown-formatted, structured AI responses | Should Have |
+| FR-10 | System shall provide quick prompt chips for common student queries | Should Have |
+| FR-11 | System shall switch between 5 specialized modules seamlessly | Should Have |
+| FR-12 | System shall work on mobile and desktop browsers | Should Have |
+| FR-13 | System shall generate post-interview performance reports | Should Have |
+| FR-14 | System shall provide skill bar visualizations for gap analysis | Could Have |
+| FR-15 | System shall require zero installation or backend setup | Must Have |
 
 ---
 
@@ -90,44 +90,34 @@ Unlike generic chatbots, Campus Compass:
 
 ### Module 1: 🧭 Career Path Navigator
 - **AI-driven career profiling** based on branch, CGPA, skills, certifications, and interests
-- **Multi-path comparison** — ranks 3–5 career options with market demand scores and salary ranges
-- **Step-by-step roadmaps** with phase-wise learning goals and timelines
-- **Industry trend integration** — recommendations update with real-time hiring data
+- **Multi-path comparison** — ranks top career options with market demand and salary ranges
+- **Phase-wise roadmaps** with learning goals and timelines
 - **Career switching support** — specialized paths for non-CS students entering IT
 
 ### Module 2: 📝 Resume Intelligence Engine
-- **ATS score calculator** with detailed breakdown by category
-- **Keyword gap analysis** against target role JDs using NLP extraction
+- **ATS score estimation** with detailed breakdown by category
+- **Keyword gap analysis** against target role requirements
 - **Section-by-section critique** — summary, experience, projects, skills, education
-- **Quantification assistant** — suggests metrics and numbers to add to achievements
-- **Multiple template library** — role-specific, ATS-optimized formats
+- **Quantification tips** — suggests metrics to strengthen achievement bullets
 
 ### Module 3: 🎙️ Mock Interview Coach
-- **Company-specific question banks** (Google, Amazon, TCS, Infosys, Wipro, Zoho, and 50+ more)
-- **Adaptive difficulty** — starts easy, adjusts based on student performance
+- **Company-specific question banks** (Google, Amazon, TCS, Infosys, Wipro, Zoho, and more)
+- **Adaptive multi-turn sessions** — interactive Q&A state machine
 - **Real-time STAR scoring** — Clarity, Technical Accuracy, Structure (each /10)
-- **Hint system** — gives one-nudge hints without revealing full answers
-- **Post-session report** — performance graph, top 3 weak areas, sample ideal answers
+- **Hint system** — nudges without revealing the full answer
+- **Post-session report** — performance summary, weak areas, sample ideal answers
 
 ### Module 4: ⚡ Skill Gap Detector
-- **JD Parser** — extracts required skills from pasted job descriptions
-- **Gap priority matrix** — Red (critical), Yellow (important), Green (nice-to-have)
-- **Resource curator** — top 3 free and paid courses per skill gap
-- **Timeline generator** — estimated weeks to proficiency based on student's current pace
-- **Progress tracker** — marks skills as "learning," "practiced," "proficient"
+- **Gap priority matrix** — critical, important, and nice-to-have skills identified
+- **Resource curation** — top courses and resources per skill
+- **Timeline estimation** — study plan with realistic milestones
+- **Visual skill bars** — progress visualization by tech stack
 
-### Module 5: 🏢 Placement Drive Intelligence
-- **Company drive database** — schedules, eligibility, CTC, and process details
-- **Smart eligibility matching** — instantly shows which companies a student qualifies for
-- **Preparation packs** — company-specific: previous questions, pattern analysis, tips
-- **Application tracking** — from "Applied" to "Offer Received" status pipeline
-- **TPO portal** — upload new drives, manage eligible student lists, bulk notify
-
-### Module 6: 🤝 AI Mentor Matching
-- **Profile-based alumni matching** using domain, college, branch, and career path alignment
-- **Availability scheduling** — calendar integration for 30-min mentorship slots
-- **Session prep kit** — AI-generated talking points and questions for each mentor meeting
-- **Anonymous feedback** — students rate session quality; AI improves future matches
+### Module 5: 🏢 Placement Drive Tracker
+- **Company information** — schedules, eligibility, CTC, and process details
+- **Eligibility checking** — branch, CGPA, and backlog filters
+- **Preparation packs** — company-specific tips and question patterns
+- **Drive calendar** — season-wise schedule (August through April)
 
 ---
 
@@ -135,93 +125,78 @@ Unlike generic chatbots, Campus Compass:
 
 | Module | User Inputs | AI Processing | Expected Outputs |
 |--------|-------------|---------------|-----------------|
-| **Career Navigator** | Branch, Year, CGPA, Skills list, Interests, Career preference | LLM profile analysis + career graph traversal + market trend API | Ranked career paths, Phase-wise roadmap, Companies list, Salary range, Next action |
-| **Resume Analyzer** | Resume PDF/DOCX, Target role, Optional: JD text | NLP extraction + ATS simulation + content scoring + keyword gap analysis | ATS score /100, Missing keywords, Section-by-section feedback, Shortlist probability, Rewritten sections |
-| **Mock Interview** | Company name, Role, Round type, Experience level | Question generation + Answer evaluation + STAR scoring + NLP feedback | Q&A transcript, Per-question scores, Weak area identification, Sample ideal answers, Performance graph |
-| **Skill Gap Detector** | Job description (text), Current skills list, Target timeline | Skill NER extraction + gap computation + resource database lookup + timeline modeling | Gap matrix (Red/Yellow/Green), Priority-ordered gap list, Top 3 resources/gap, Study timeline, Progress tracker |
-| **Placement Tracker** | Company name / "upcoming drives" query | Drive database query + eligibility filter + company prep database | Drive schedule table, Eligibility status, Prep pack download, Application status board |
-| **Mentor Matching** | Career goal, Domain, Preferred mentor type | Embedding-based similarity match + availability check | Top 3 matched alumni profiles, Meeting scheduler, AI-generated session prep kit |
+| **Career Navigator** | Branch, Year, Skills, Interests | Gemini 2.0 Flash + campus system prompt | Ranked career paths, Phase-wise roadmap, Salary range, Next action |
+| **Resume Analyzer** | Resume text / description, Target role | LLM content scoring + keyword analysis | ATS score estimate, Missing keywords, Section feedback, Improvement tips |
+| **Mock Interview** | Company name, Role, Round type | Multi-turn state machine + Gemini evaluation | Q&A transcript, Per-question scores, Weak areas, Sample answers |
+| **Skill Gap Detector** | Job description / target role, Current skills | LLM gap analysis + resource lookup | Gap matrix, Priority-ordered list, Study resources, Timeline |
+| **Placement Tracker** | Company name / query | Drive knowledge base + eligibility filter | Drive schedule, Eligibility status, Prep tips, Application advice |
 
 ---
 
-## 7. High-Level Solution Design
+## 7. System Architecture
 
 ### Architecture Overview
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                         USER LAYER                          │
-│  [Mobile App - React Native]  [Web App - Next.js]           │
-│            [Admin/TPO Panel - React]                        │
-└────────────────────────┬────────────────────────────────────┘
-                         │ HTTPS / WebSocket
-┌────────────────────────▼────────────────────────────────────┐
-│                   API GATEWAY LAYER                         │
-│  Kong API Gateway → Firebase Auth → Rate Limiter → LB      │
-└────────────────────────┬────────────────────────────────────┘
-                         │ Internal REST / gRPC
-┌────────────────────────▼────────────────────────────────────┐
-│              CORE MICROSERVICES LAYER                       │
-│  [Career Svc] [Resume Svc] [Interview Svc]                  │
-│  [SkillGap Svc] [Placement Svc] [Mentor Svc]               │
-│             (All: FastAPI + Python)                         │
-└──────────────┬──────────────────────┬───────────────────────┘
-               │ AI Model API         │ Event Queue
-┌──────────────▼──────┐    ┌──────────▼────────────────────┐
-│     AI ENGINE       │    │     MESSAGE BROKER             │
-│  Gemini Pro (LLM)   │    │  Apache Kafka                  │
-│  LangChain (Orch.)  │    │  Push Notifications            │
-│  Pinecone (Vector)  │    │  Email Queue                   │
-│  spaCy + BERT (NLP) │    └───────────────────────────────┘
-└─────────────────────┘
-┌─────────────────────────────────────────────────────────────┐
-│                      DATA LAYER                             │
-│  PostgreSQL (users, profiles)  MongoDB (chat logs)          │
-│  Redis (sessions, cache)       Firebase (realtime)          │
-│  Google Cloud Storage (resumes, files)                      │
-└─────────────────────────────────────────────────────────────┘
-┌─────────────────────────────────────────────────────────────┐
-│                  OBSERVABILITY LAYER                        │
-│  Grafana + Prometheus (metrics) · Sentry (error tracking)  │
-│  Cloud Logging (logs) · DataDog APM (tracing)              │
-└─────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│                       USER LAYER                         │
+│   Browser (Desktop / Mobile) — any modern browser        │
+└───────────────────────┬──────────────────────────────────┘
+                        │ User interaction
+┌───────────────────────▼──────────────────────────────────┐
+│              STATIC WEB APPLICATION                      │
+│   index.html + styles.css + app.js                       │
+│   Single file — no build step — no server required       │
+│                                                          │
+│   ┌────────────┐  ┌──────────────┐  ┌───────────────┐   │
+│   │  5 Module  │  │  Chat Engine │  │ Smart Engine  │   │
+│   │  Selector  │  │  (multi-turn)│  │ (offline mode)│   │
+│   └────────────┘  └──────┬───────┘  └───────────────┘   │
+└──────────────────────────┼───────────────────────────────┘
+                           │ HTTPS fetch (Gemini API)
+┌──────────────────────────▼───────────────────────────────┐
+│                   GOOGLE GEMINI API                      │
+│   Model: gemini-2.0-flash                                │
+│   System Prompt: Campus career counselor persona         │
+│   Context: Rolling 10-turn conversation history          │
+│   Config: temp=0.75, maxTokens=1200                      │
+└──────────────────────────┬───────────────────────────────┘
+                           │ Response streamed back
+┌──────────────────────────▼───────────────────────────────┐
+│                  CLIENT-SIDE STATE                       │
+│   localStorage: API key (never sent to any server)       │
+│   JS Memory: Chat history, interview session state       │
+└──────────────────────────────────────────────────────────┘
 ```
 
 ### Key Design Decisions
 
-1. **Microservices over Monolith:** Each AI module is independently deployable, allowing targeted scaling. If Mock Interview traffic spikes before placement season, only that service scales.
+1. **Zero-backend by design:** The entire application runs client-side. No server, no database, no DevOps required. This makes it instantly deployable and shareable via a single link.
 
-2. **RAG (Retrieval-Augmented Generation):** Career recommendations and skill gap analysis use a vector database (Pinecone) containing 10,000+ curated career resources, JD patterns, and company hiring profiles — grounding LLM responses in verified data.
+2. **Gemini 2.0 Flash as the AI engine:** Chosen for speed, quality, and the generous free tier. The API is called directly from the browser using the user's own API key — their key, their quota.
 
-3. **Event-Driven Placement Alerts:** Kafka ensures no notification is missed under load; drives posting triggers async fan-out to all eligible students.
+3. **Rolling 10-turn conversation memory:** The last 10 message turns are included in every API call, giving Gemini full context to avoid repetitive questions and maintain coherent multi-turn conversations.
 
-4. **Stateful Conversations:** Redis caches session context so users can continue conversations across multiple logins without re-explaining their profile.
+4. **Campus-tuned system prompt:** A detailed system prompt instructs Gemini to behave as an experienced Indian campus placement counselor, ensuring responses stay relevant, structured, and motivating.
+
+5. **Smart Engine fallback:** When no API key is provided (or if the API fails), the app falls back to a built-in rules-based engine with pre-engineered responses for all 5 modules — ensuring 100% uptime.
+
+6. **API key stays local:** The key is stored exclusively in `localStorage`. It never leaves the user's browser. No tracking, no telemetry.
 
 ---
 
-## 8. Suggested Technology Stack
+## 8. Technology Stack
 
 | Layer | Technology | Justification |
-|-------|-----------|---------------|
-| **Mobile Frontend** | React Native (Expo) | Cross-platform iOS/Android from single codebase; large community |
-| **Web Frontend** | Next.js 14 | SSR for SEO, App Router for performance, TypeScript for reliability |
-| **Backend Services** | FastAPI (Python) | Async support, native Python AI/ML library integration, auto-docs |
-| **API Gateway** | Kong | Plugin ecosystem, rate limiting, auth integration, open source |
-| **Auth** | Firebase Authentication | Easy OAuth (Google/LinkedIn), JWT tokens, battle-tested |
-| **Conversational AI** | Google Gemini Pro | State-of-the-art reasoning, multimodal (for resume images), Google Cloud native |
-| **AI Orchestration** | LangChain | Chains, agents, memory, tool integration — reduces boilerplate |
-| **Vector DB** | Pinecone | Managed, fast semantic search for RAG pipeline |
-| **NLP Processing** | spaCy + BERT fine-tuned | Resume parsing, skill extraction, JD analysis |
-| **Primary DB** | PostgreSQL (Cloud SQL) | Relational data integrity for user profiles and placements |
-| **Chat/Log Store** | MongoDB Atlas | Flexible schema for varied chat structures |
-| **Cache** | Redis (Cloud Memorystore) | Sub-millisecond session and frequently-accessed data |
-| **Realtime** | Firebase Realtime Database | Drive notifications, online status, typing indicators |
-| **File Storage** | Google Cloud Storage | Resume PDFs, profile photos — CDN-served |
-| **Message Broker** | Apache Kafka | Async placement notifications to thousands of students |
-| **Cloud Platform** | Google Cloud Platform (GCP) | Gemini integration, managed services, generous student credits |
-| **Containers** | Docker + Kubernetes (GKE) | Consistent environments, auto-scaling, zero-downtime deployments |
-| **CI/CD** | GitHub Actions + Cloud Build | Automated testing and deployment pipelines |
-| **Monitoring** | Grafana + Prometheus + Sentry | Full observability stack for production reliability |
+|-------|------------|---------------|
+| **Frontend** | HTML5, CSS3, Vanilla JavaScript | No framework needed — keeps the app lightweight, dependency-free, and shareable as a single file |
+| **Fonts** | Google Fonts (Inter, Space Grotesk) | Professional typography without build tooling |
+| **AI Engine** | Google Gemini 2.0 Flash | State-of-the-art conversational reasoning; fast inference; generous free tier; direct browser API access |
+| **API Protocol** | Generative Language API (REST/JSON) | Simple fetch() call, no SDK required |
+| **Session State** | JavaScript in-memory | Chat history, interview state machine, module context |
+| **Persistence** | Browser localStorage | API key stored locally; no backend required |
+| **Hosting** | GitHub Pages / any static host | Zero-cost, zero-config, globally accessible |
+| **Version Control** | GitHub | Source at github.com/AnwayeeDas05/ltm_project |
 
 ---
 
@@ -230,60 +205,52 @@ Unlike generic chatbots, Campus Compass:
 ### For Students
 | Benefit | Measurable Metric |
 |---------|------------------|
-| Career Clarity | 90% of users report clear career direction within 2 sessions |
-| Improved Placement Rate | 40% increase in campus placement success rate |
-| Interview Success | 3× more mock interviews practiced vs. traditional methods |
-| Resume Quality | Average ATS score improvement from 45 → 78 |
-| 24/7 Access | Zero waiting time vs. 3–5 days for counselor appointments |
+| Career Clarity | Clear career direction within 1–2 conversations |
+| Interview Readiness | Full mock interview with scored feedback in < 10 min |
+| Resume Improvement | Instant ATS analysis without waiting for a counselor |
+| 24/7 Availability | Zero waiting time vs. 3–5 days for appointments |
+| Accessibility | Works on any device with a browser — no app install |
 
 ### For Institutions
 | Benefit | Measurable Metric |
 |---------|------------------|
-| Higher Placement %, Better Rankings | Drives institutional reputation and student intake |
-| TPO Efficiency | 60% reduction in manual drive management effort |
-| Data-Driven Decisions | First-ever analytics on student readiness trends |
-| Cost Savings | 80% reduction vs. external career counseling services |
-
-### For Industry (Companies)
-- Higher quality candidates with **targeted skill preparation**
-- Reduced time-to-hire via better-matched applicants
-- **Lower attrition** from candidates who chose their role consciously
+| Reduced TPO load | Students get common guidance instantly, freeing TPOs for complex cases |
+| Cost savings | Zero infrastructure cost — runs on student's own device |
+| Higher placement readiness | Students arrive better prepared for drives |
 
 ---
 
 ## 10. Future Enhancements
 
-### Phase 1 — Foundation (Q1 2025, Months 1–3)
-- Core chat interface + Career Navigator + Resume Analyzer MVP
-- Single college pilot: 500 students
-- Basic placement drive listing
+### Phase 1 — Foundation ✅ (Current)
+- 5-module AI chat interface
+- Gemini 2.0 Flash integration with multi-turn memory
+- Smart Engine offline fallback
+- Static single-file deployment
 
-### Phase 2 — Full Suite (Q2–Q3 2025, Months 4–9)
-- Mock Interview engine, Skill Gap Detector, Placement Tracker launch
-- Mobile app (iOS + Android) release
-- Expansion to 10 colleges, 5,000 students
+### Phase 2 — Intelligence Layer
+- **Voice interview practice** — speech recognition + pronunciation feedback
+- **Resume PDF upload** — parse and analyze actual resume files
+- **Personalized learning tracker** — save progress across sessions
 
-### Phase 3 — Intelligence Layer (Q4 2025, Months 10–12)
-- **AI Voice Interview Practice** — speech recognition + pronunciation feedback
-- **LinkedIn Profile Analyzer** — cross-reference public profiles
-- **Employer Portal** — companies post drives, view pre-screened candidates
-- **Predictive Analytics Dashboard** — readiness heatmaps, bottleneck identification
+### Phase 3 — Platform
+- **Shareable roadmaps** — generate and export career roadmap PDFs
+- **Multi-language support** — Hindi, Tamil, Telugu, Bengali
+- **Employer portal** — companies post drives, students apply directly
 
-### Phase 4 — Platform Scale (2026)
-- **Multi-lingual support** — Hindi, Tamil, Telugu, Bengali (breaking language barriers)
-- **AR Campus Tours** — virtual campus exploration for aspiring students
-- **Blockchain Credential Verification** — tamper-proof digital certificates
-- **National University Network** — pan-India consortium of 500+ colleges
-- **AI Job Matching Marketplace** — end-to-end from guidance to offer letter
+### Phase 4 — Ecosystem
+- **College-wide deployment** — TPO dashboard for bulk student management
+- **Alumni network integration** — AI mentor matching
+- **Predictive analytics** — readiness heatmaps, placement outcome forecasting
 
 ---
 
 ## Summary
 
-Campus Compass is not just a chatbot — it is a **full-stack AI career ecosystem** that democratizes access to world-class career guidance for every engineering student in India, regardless of their college tier, family background, or geographic location.
+Campus Compass is a **fully functional AI career assistant** that runs entirely in the browser — no backend, no installation, no account required. It combines the power of Google Gemini 2.0 Flash with a deep understanding of Indian campus placements to deliver personalized guidance across 5 modules, instantly and for free.
 
 > *"Every student deserves a career counselor in their pocket."*
 
 ---
 
-*Solution Blueprint Document v1.0 — Campus Compass AI Challenge 2025*
+*Solution Blueprint Document v2.0 — Campus Compass | September 2025*

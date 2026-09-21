@@ -307,101 +307,81 @@
     <div class="section-container">
       <div class="section-header">
         <span class="section-tag">System Design</span>
-        <h2 class="section-title">High-Level <span class="gradient-text">Architecture</span></h2>
-        <p class="section-subtitle">A microservices-based, cloud-native AI architecture designed for scale</p>
+        <h2 class="section-title">How It <span class="gradient-text">Works</span></h2>
+        <p class="section-subtitle">A zero-backend, client-side architecture powered by Gemini 2.0 Flash</p>
       </div>
       <div class="arch-diagram">
         <div class="arch-layer layer-users">
-          <div class="layer-label">👥 Users</div>
+          <div class="layer-label">&#x1F464; User</div>
           <div class="arch-nodes">
-            <div class="arch-node">Student App<br/><small>React Native</small></div>
-            <div class="arch-node">Web Portal<br/><small>Next.js</small></div>
-            <div class="arch-node">Admin Panel<br/><small>React</small></div>
+            <div class="arch-node">Desktop<br/><small>Any modern browser</small></div>
+            <div class="arch-node">Mobile<br/><small>PWA / any browser</small></div>
           </div>
         </div>
         <div class="arch-arrow-row">
-          <div class="arch-arrow">↓ HTTPS/WSS</div>
+          <div class="arch-arrow">&#x2193; User interaction</div>
         </div>
         <div class="arch-layer layer-gateway">
-          <div class="layer-label">🔐 API Gateway & Auth</div>
+          <div class="layer-label">&#x1F5A5;&#xFE0F; Static Web Application</div>
           <div class="arch-nodes">
-            <div class="arch-node wide">Kong API Gateway · Firebase Auth · Rate Limiter · Load Balancer</div>
+            <div class="arch-node wide">HTML5 &middot; CSS3 &middot; Vanilla JavaScript &mdash; single file, no build step, no server needed</div>
           </div>
         </div>
         <div class="arch-arrow-row">
-          <div class="arch-arrow">↓ REST / GraphQL</div>
-        </div>
-        <div class="arch-layer layer-services">
-          <div class="layer-label">⚙️ Core AI Microservices</div>
-          <div class="arch-nodes">
-            <div class="arch-node service-node purple">Career<br/>Navigator<br/><small>FastAPI</small></div>
-            <div class="arch-node service-node blue">Resume<br/>Analyzer<br/><small>FastAPI</small></div>
-            <div class="arch-node service-node cyan">Interview<br/>Coach<br/><small>FastAPI</small></div>
-            <div class="arch-node service-node green">Skill Gap<br/>Detector<br/><small>FastAPI</small></div>
-            <div class="arch-node service-node orange">Placement<br/>Tracker<br/><small>FastAPI</small></div>
-          </div>
-        </div>
-        <div class="arch-arrow-row">
-          <div class="arch-arrow">↓ AI Model Layer</div>
+          <div class="arch-arrow">&#x2193; Gemini API (HTTPS fetch)</div>
         </div>
         <div class="arch-layer layer-ai">
-          <div class="layer-label">🤖 AI Engine</div>
+          <div class="layer-label">&#x1F916; AI Engine</div>
           <div class="arch-nodes">
-            <div class="arch-node ai-node">Gemini Pro<br/><small>Conversational AI</small></div>
-            <div class="arch-node ai-node">LangChain<br/><small>Orchestration</small></div>
-            <div class="arch-node ai-node">Pinecone<br/><small>Vector Store</small></div>
-            <div class="arch-node ai-node">NLP Pipeline<br/><small>spaCy + BERT</small></div>
+            <div class="arch-node ai-node">Gemini 2.0 Flash<br/><small>Google LLM</small></div>
+            <div class="arch-node ai-node">Campus System Prompt<br/><small>Career persona</small></div>
+            <div class="arch-node ai-node">10-turn Memory<br/><small>Multi-turn context</small></div>
           </div>
         </div>
         <div class="arch-arrow-row">
-          <div class="arch-arrow">↓ Data Layer</div>
+          <div class="arch-arrow">&#x2193; Client-side state</div>
         </div>
         <div class="arch-layer layer-data">
-          <div class="layer-label">🗄️ Data & Infrastructure</div>
+          <div class="layer-label">&#x1F4BE; Local State (no server)</div>
           <div class="arch-nodes">
-            <div class="arch-node">PostgreSQL<br/><small>User Data</small></div>
-            <div class="arch-node">MongoDB<br/><small>Chat Logs</small></div>
-            <div class="arch-node">Redis<br/><small>Cache</small></div>
-            <div class="arch-node">Firebase<br/><small>Realtime</small></div>
-            <div class="arch-node">GCS<br/><small>File Storage</small></div>
+            <div class="arch-node">localStorage<br/><small>API key</small></div>
+            <div class="arch-node">JS Memory<br/><small>Chat session</small></div>
+            <div class="arch-node">Smart Engine<br/><small>Offline fallback</small></div>
           </div>
         </div>
       </div>
       <div class="tech-stack-grid">
         <div class="tech-category">
-          <h4>🎨 Frontend</h4>
+          <h4>&#x1F3A8; Frontend</h4>
           <div class="tech-tags">
-            <span class="tech-tag">Next.js 14</span>
-            <span class="tech-tag">React Native</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">TailwindCSS</span>
+            <span class="tech-tag">HTML5</span>
+            <span class="tech-tag">CSS3</span>
+            <span class="tech-tag">Vanilla JS</span>
+            <span class="tech-tag">Google Fonts</span>
           </div>
         </div>
         <div class="tech-category">
-          <h4>⚙️ Backend</h4>
+          <h4>&#x1F916; AI / LLM</h4>
           <div class="tech-tags">
-            <span class="tech-tag">FastAPI</span>
-            <span class="tech-tag">Node.js</span>
-            <span class="tech-tag">GraphQL</span>
-            <span class="tech-tag">WebSockets</span>
+            <span class="tech-tag">Gemini 2.0 Flash</span>
+            <span class="tech-tag">Generative Language API</span>
+            <span class="tech-tag">Multi-turn Context</span>
           </div>
         </div>
         <div class="tech-category">
-          <h4>🤖 AI/ML</h4>
+          <h4>&#x2699;&#xFE0F; Architecture</h4>
           <div class="tech-tags">
-            <span class="tech-tag">Gemini Pro</span>
-            <span class="tech-tag">LangChain</span>
-            <span class="tech-tag">Pinecone</span>
-            <span class="tech-tag">spaCy</span>
+            <span class="tech-tag">Zero-backend</span>
+            <span class="tech-tag">No build step</span>
+            <span class="tech-tag">Client-side only</span>
           </div>
         </div>
         <div class="tech-category">
-          <h4>☁️ Cloud & DevOps</h4>
+          <h4>&#x1F680; Hosting</h4>
           <div class="tech-tags">
-            <span class="tech-tag">GCP</span>
-            <span class="tech-tag">Kubernetes</span>
-            <span class="tech-tag">Docker</span>
-            <span class="tech-tag">CI/CD</span>
+            <span class="tech-tag">GitHub Pages</span>
+            <span class="tech-tag">Any static host</span>
+            <span class="tech-tag">Open in browser</span>
           </div>
         </div>
       </div>
