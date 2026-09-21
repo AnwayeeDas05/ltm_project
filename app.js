@@ -655,8 +655,8 @@ async function callGeminiAPI(userQuery) {
     contents.push({ role: 'user', parts: [{ text: userQuery }] });
   }
 
-  // Model: Google Gemini 3.1 Flash
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash:generateContent?key=${encodeURIComponent(geminiApiKey)}`;
+  // Model: Google Gemini 3.1 Flash Lite
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${encodeURIComponent(geminiApiKey)}`;
 
   let res;
   let retries = 3;
