@@ -270,6 +270,9 @@
               </div>
             </div>
             <div style="display:flex;align-items:center;gap:8px;">
+              <button class="prompt-view-btn" id="promptViewBtn" onclick="openPromptModal()" title="View Active System Prompt">
+                <span>👁️</span> <span>Prompt</span>
+              </button>
               <button class="engine-badge-btn" id="engineBadgeBtn" onclick="openApiKeyModal()" title="AI Engine Settings">
                 <span class="engine-dot" id="engineDot"></span>
                 <span id="engineLabel">Smart Engine</span>
@@ -308,7 +311,7 @@
       <div class="section-header">
         <span class="section-tag">System Design</span>
         <h2 class="section-title">How It <span class="gradient-text">Works</span></h2>
-        <p class="section-subtitle">A zero-backend, client-side architecture powered by Gemini 2.0 Flash</p>
+        <p class="section-subtitle">A zero-backend, client-side architecture powered by Gemini 3.5 Flash</p>
       </div>
       <div class="arch-diagram">
         <div class="arch-layer layer-users">
@@ -333,7 +336,7 @@
         <div class="arch-layer layer-ai">
           <div class="layer-label">&#x1F916; AI Engine</div>
           <div class="arch-nodes">
-            <div class="arch-node ai-node">Gemini 2.0 Flash<br/><small>Google LLM</small></div>
+            <div class="arch-node ai-node">Gemini 3.5 Flash<br/><small>Google LLM</small></div>
             <div class="arch-node ai-node">Campus System Prompt<br/><small>Career persona</small></div>
             <div class="arch-node ai-node">10-turn Memory<br/><small>Multi-turn context</small></div>
           </div>
@@ -363,7 +366,7 @@
         <div class="tech-category">
           <h4>&#x1F916; AI / LLM</h4>
           <div class="tech-tags">
-            <span class="tech-tag">Gemini 2.0 Flash</span>
+            <span class="tech-tag">Gemini 3.5 Flash</span>
             <span class="tech-tag">Generative Language API</span>
             <span class="tech-tag">Multi-turn Context</span>
           </div>
@@ -626,65 +629,132 @@
     <div class="section-container">
       <div class="section-header">
         <span class="section-tag">Prompt Engineering Journal</span>
-        <h2 class="section-title">Iteration → <span class="gradient-text">Refinement</span> → Excellence</h2>
-        <p class="section-subtitle">Documenting our prompt engineering journey from raw ideas to precision instructions</p>
+        <h2 class="section-title">Precision Prompts For <span class="gradient-text">All 5 Modules</span></h2>
+        <p class="section-subtitle">Documenting our specialized, production-ready system prompts engineered for each distinct career domain</p>
       </div>
       <div class="prompt-journey">
+        <!-- Module 1: Career Navigator -->
         <div class="journey-step">
           <div class="journey-num">01</div>
           <div class="journey-content">
-            <h4>Initial Ideation Prompt</h4>
+            <h4>🧭 Module 1: Career Navigator System Prompt</h4>
             <div class="prompt-box v1">
-              <div class="prompt-version">v1.0 — Raw</div>
-              <code>"Create an AI assistant for students"</code>
+              <div class="prompt-version">v1.0 — Raw Ideation</div>
+              <code>"Suggest careers for engineering students in India."</code>
             </div>
-            <div class="iteration-arrow">↓ Observation: Too vague, generic response</div>
-            <div class="prompt-box v2">
-              <div class="prompt-version">v2.0 — Improved</div>
-              <code>"Design an AI assistant for engineering college students in India to help them with career guidance and placement preparation. Include specific use cases, target users, and key features."</code>
-            </div>
-            <div class="iteration-arrow">↓ Observation: Better scope, but missing context & constraints</div>
+            <div class="iteration-arrow">↓ Refinement: Added persona, tier 1–3 context, CTC tiers, 3-phase milestones</div>
             <div class="prompt-box v3">
-              <div class="prompt-version">v3.0 — Final</div>
-              <code>"You are a product strategist designing an AI-powered Career Guidance Assistant for engineering college students in Tier 1–3 Indian colleges. The system must address: (1) career path confusion, (2) poor placement readiness, (3) lack of 24/7 counselor access. Generate: use cases with actors, functional requirements, AI module descriptions, and measurable success metrics. Assume 500 concurrent users and mobile-first design."</code>
+              <div class="prompt-version">v3.0 — Production Live System Prompt</div>
+              <code>"You are Campus Compass AI — an expert career counselor for engineering and college students in India.
+Context & Persona: Deeply understand Indian campus hiring tiers (Mass/Service 3.5–5 LPA, Product/Growth 8–18 LPA, Tier-1/Dream 20–45+ LPA).
+Capabilities: When a student asks about roles (SDE, Data Science, DevOps, AI/ML, Non-CS to IT), deliver:
+1. Executive Role Summary & market demand in India
+2. Core Tech Stack & Prerequisites
+3. 3-Phase Milestone Roadmap (Phase 1: Foundations, Phase 2: Core Projects, Phase 3: Placement Sprints)
+4. Target Companies hiring for this role and realistic compensation bands
+Formatting: Clear markdown, bold metrics, bulleted checklists, and 2 contextual follow-up action chips."</code>
             </div>
           </div>
         </div>
+
+        <!-- Module 2: Resume Analyzer -->
         <div class="journey-step">
           <div class="journey-num">02</div>
           <div class="journey-content">
-            <h4>Architecture Design Prompt</h4>
+            <h4>📝 Module 2: Resume Analyzer & ATS Intelligence Prompt</h4>
             <div class="prompt-box v1">
-              <div class="prompt-version">v1.0 — Raw</div>
-              <code>"What tech stack should I use for an AI chatbot?"</code>
+              <div class="prompt-version">v1.0 — Raw Ideation</div>
+              <code>"Review this student resume bullet and tell me what is wrong."</code>
             </div>
-            <div class="iteration-arrow">↓ Learning: Need to specify scale, AI capabilities, constraints</div>
+            <div class="iteration-arrow">↓ Refinement: Added Google XYZ formula, ATS keyword gap detection, quantifiable scoring</div>
             <div class="prompt-box v3">
-              <div class="prompt-version">v3.0 — Final</div>
-              <code>"Design a microservices architecture for an AI student assistant platform supporting 10,000+ students across 50 colleges. Requirements: (1) sub-200ms response time, (2) 99.9% uptime, (3) LLM integration for conversational AI, (4) real-time notifications, (5) file processing for resumes. Recommend: frontend framework, backend services, AI/ML stack, database choices, cloud provider, and deployment strategy. Justify each choice."</code>
+              <div class="prompt-version">v3.0 — Production Live System Prompt</div>
+              <code>"You are Campus Compass AI — Senior Technical Recruiter & ATS Optimization Specialist.
+Goal: Audit student resume snippets, project descriptions, and skill profiles against top tech recruiting standards.
+Provide:
+1. ATS Compatibility Score /100 with clear justification
+2. Critical Missing Keywords for the target role
+3. 'Before vs After' Bullet Transformation using Google's XYZ formula: 'Accomplished [X], as measured by [Y], by doing [Z]'
+4. Section-by-section punchy recommendations (Projects, Technical Skills, Summary)
+Keep tone constructive, high-precision, and directly applicable to campus placement screenings."</code>
             </div>
           </div>
         </div>
+
+        <!-- Module 3: Mock Interview -->
         <div class="journey-step">
           <div class="journey-num">03</div>
           <div class="journey-content">
-            <h4>Resume Analysis System Prompt</h4>
+            <h4>🎙️ Module 3: Adaptive Mock Interview Coach Prompt</h4>
+            <div class="prompt-box v1">
+              <div class="prompt-version">v1.0 — Raw Ideation</div>
+              <code>"Take my mock interview for a software job."</code>
+            </div>
+            <div class="iteration-arrow">↓ Refinement: Structured 4-turn state machine, 3-dimensional scoring rubric, hints & model answers</div>
             <div class="prompt-box v3">
-              <div class="prompt-version">v3.0 — Production</div>
-              <code>"You are an expert ATS (Applicant Tracking System) and senior HR specialist with 10+ years of experience in technical recruiting. Analyze the following student resume for the role of [ROLE] at [COMPANY]. Provide: (1) ATS compatibility score /100, (2) top 5 missing keywords from the JD, (3) section-by-section improvements (Summary, Experience, Skills, Projects), (4) overall shortlist probability percentage, (5) one-line power statement to replace the objective. Be specific, actionable, and empathetic to a student's limited experience."</code>
+              <div class="prompt-version">v3.0 — Production Live System Prompt</div>
+              <code>"You are [COMPANY]'s Senior Technical Interviewer & Bar Raiser conducting a [ROLE] interview for a campus placement candidate.
+Protocol:
+- Ask exactly ONE question at a time, starting with fundamentals and progressing to edge cases.
+- After every candidate answer:
+  * Score it out of 10 on: Clarity, Technical Accuracy, and Problem Structuring
+  * Highlight strengths and identify missed edge cases
+  * Provide the Ideal Senior Engineer Response
+- Support dynamic commands: if user says 'hint', provide a gentle nudge without spoiling; if 'skip', provide the solution.
+- Conclude round 4 with a comprehensive Placement Readiness Scorecard with hiring verdict (Strong Hire / Lean Hire / No Hire)."</code>
             </div>
           </div>
         </div>
+
+        <!-- Module 4: Skill Gap Detector -->
         <div class="journey-step">
           <div class="journey-num">04</div>
           <div class="journey-content">
-            <h4>Mock Interview System Prompt</h4>
+            <h4>⚡ Module 4: Skill Gap & Curriculum Matrix Prompt</h4>
+            <div class="prompt-box v1">
+              <div class="prompt-version">v1.0 — Raw Ideation</div>
+              <code>"What skills do I need to learn to get placed?"</code>
+            </div>
+            <div class="iteration-arrow">↓ Refinement: 3-tier gap prioritization (Critical, Important, Bonus) + 90-day execution calendar</div>
             <div class="prompt-box v3">
-              <div class="prompt-version">v3.0 — Production</div>
-              <code>"You are [COMPANY]'s senior technical interviewer conducting a [ROLE] interview for a final-year engineering student. Start with an easy warm-up, progressively increase difficulty, ask follow-up questions based on their answers. After each response: score it /10 on Clarity, Technical Accuracy, and Structure. If the answer is weak, give a hint. After 5 questions, provide: overall performance score, top 3 improvement areas, and ideal sample answers for the 2 weakest responses. Maintain an encouraging yet professional tone."</code>
+              <div class="prompt-version">v3.0 — Production Live System Prompt</div>
+              <code>"You are Campus Compass AI — Principal Engineering Mentor & Competency Architect.
+Task: Cross-reference a student's current branch/skills against industry benchmarks for their target role.
+Deliver:
+1. Priority-Ranked Gap Matrix:
+   - 🔴 Critical Gaps (Must-haves to clear online assessments & initial rounds)
+   - 🟡 Important Differentiators (Hands-on frameworks & system design basics)
+   - 🟢 Bonus High-Tier Skills (Cloud deployments, Docker, CI/CD to unlock top compensation)
+2. 90-Day Sprint Calendar broken down into 30-day actionable sprints
+3. Curated zero-cost learning resources (official documentation, top GitHub repos, sandbox platforms)."</code>
             </div>
           </div>
         </div>
+
+        <!-- Module 5: Placement Tracker -->
+        <div class="journey-step">
+          <div class="journey-num">05</div>
+          <div class="journey-content">
+            <h4>🏢 Module 5: Placement Drive & Company Intelligence Prompt</h4>
+            <div class="prompt-box v1">
+              <div class="prompt-version">v1.0 — Raw Ideation</div>
+              <code>"Tell me about company placement processes and cutoffs."</code>
+            </div>
+            <div class="iteration-arrow">↓ Refinement: Exact test patterns, CGPA cutoffs, past paper analysis, round-wise strategy for 50+ companies</div>
+            <div class="prompt-box v3">
+              <div class="prompt-version">v3.0 — Production Live System Prompt</div>
+              <code>"You are Campus Compass AI — Campus Placement Director & Company Intelligence Specialist.
+Knowledge Base: 50+ Indian and global recruiters (TCS, Infosys, Cognizant, Wipro, Amazon, IBM, Microsoft, Google, Flipkart, Accenture, etc.).
+When queried about any company or upcoming drive:
+1. Recruitment Pattern Breakdown (Aptitude, Coding, Technical Interview, HR)
+2. Eligibility & Cutoff Matrix (CGPA, active backlog rules, allowed branches)
+3. Compensation Structure (Base CTC, bonuses, tier variants e.g. TCS Ninja vs Digital vs Prime)
+4. High-Yield Topics & Company Gotchas from previous recruitment cycles
+5. Actionable 7-day last-mile preparation checklist."</code>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -713,7 +783,7 @@
       <div class="footer-meta">
         <span>Built for the AI Assistant Challenge 2025</span>
         <span>•</span>
-        <span>Solution Blueprint v1.0</span>
+        <span>Solution Blueprint v2.0</span>
       </div>
     </div>
   </footer>
@@ -727,20 +797,53 @@
       </div>
       <div class="modal-body">
         <p style="font-size:0.88rem;color:var(--text);margin-bottom:8px;">
-          Campus Compass runs on an advanced <strong>Smart Dynamic Engine</strong> with rich knowledge of 50+ companies, placement patterns, roadmaps, and adaptive mock interviews with zero setup.
+          Campus Compass features dual-engine architecture:
         </p>
-        <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">
-          Want unbounded live LLM generation? Enter a free <strong>Google Gemini API Key</strong> below:
-        </p>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:14px;font-size:0.82rem;">
+          <div style="margin-bottom:6px;">✨ <strong>Gemini 3.5 Flash (Live AI):</strong> Direct unbounded LLM generation with tailored prompt instructions for all 5 modules.</div>
+          <div>⚡ <strong>Smart Dynamic Engine:</strong> Zero-API-key client-side simulation with 50+ company databases & roadmaps.</div>
+        </div>
         <label style="font-size:0.75rem;font-weight:600;text-transform:uppercase;color:var(--cyan);letter-spacing:0.5px;">Google Gemini API Key</label>
-        <input type="password" id="geminiKeyInput" placeholder="AIzaSy..." class="modal-input" />
+        <input type="password" id="geminiKeyInput" placeholder="AIzaSy... or AQ.Ab8..." class="modal-input" />
         <div style="display:flex;gap:8px;margin-top:16px;justify-content:flex-end;">
-          <button class="btn-secondary" style="padding:8px 14px;font-size:0.8rem;" onclick="clearApiKey()">Use Smart Engine</button>
-          <button class="btn-primary" style="padding:8px 16px;font-size:0.8rem;" onclick="saveApiKey()">Save Key</button>
+          <button class="btn-secondary" style="padding:8px 14px;font-size:0.8rem;" onclick="clearApiKey()">Use Smart Engine (Offline)</button>
+          <button class="btn-primary" style="padding:8px 16px;font-size:0.8rem;" onclick="saveApiKey()">Save & Connect Gemini</button>
         </div>
         <p style="font-size:0.74rem;color:var(--text-dim);margin-top:14px;line-height:1.4;">
           🔒 Stored locally in your browser only. Get a free API key instantly at <a href="https://aistudio.google.com" target="_blank" style="color:var(--cyan);text-decoration:underline;">aistudio.google.com</a>.
         </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prompt Inspector Modal -->
+  <div class="modal-backdrop" id="promptModal" style="display:none;" onclick="handlePromptModalBackdropClick(event)">
+    <div class="modal-card" style="max-width:640px;" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:1.2rem;">🧠</span>
+          <h3 id="promptModalTitle">Active System Prompt</h3>
+        </div>
+        <button class="modal-close" onclick="closePromptModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">
+          Campus Compass uses <strong>5 distinct, domain-specific system prompts</strong> tailored for each module. Select any tab below to inspect the live instructions sent to the LLM:
+        </p>
+        <div class="prompt-modal-tabs">
+          <button class="prompt-tab-btn" id="ptab-career" onclick="showPromptTab('career')">🧭 Career Navigator</button>
+          <button class="prompt-tab-btn" id="ptab-resume" onclick="showPromptTab('resume')">📝 Resume</button>
+          <button class="prompt-tab-btn" id="ptab-interview" onclick="showPromptTab('interview')">🎙️ Interview</button>
+          <button class="prompt-tab-btn" id="ptab-skill" onclick="showPromptTab('skill')">⚡ Skill Gap</button>
+          <button class="prompt-tab-btn" id="ptab-placement" onclick="showPromptTab('placement')">🏢 Placement</button>
+        </div>
+        <div class="prompt-code-block" id="promptCodeDisplay">
+          <!-- Populated by JS -->
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;">
+          <span style="font-size:0.75rem;color:var(--cyan);" id="promptActiveIndicator">● Active module prompt</span>
+          <button class="btn-secondary" style="padding:6px 14px;font-size:0.8rem;" onclick="closePromptModal()">Close</button>
+        </div>
       </div>
     </div>
   </div>

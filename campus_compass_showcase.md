@@ -15,7 +15,7 @@
 | **Problem Solved** | 60%+ engineering graduates unplaced due to career/prep gaps |
 | **AI Modules** | 5 (Career Navigator, Resume Analyzer, Mock Interview, Skill Gap Detector, Placement Tracker) |
 | **Target Users** | UG/PG engineering students, 1st–4th year |
-| **AI Engine** | Google Gemini 2.0 Flash (live LLM via Generative Language API) |
+| **AI Engine** | Google Gemini 3.5 Flash (live LLM with specialized prompts for all 5 modules) |
 | **Architecture** | Zero-backend · Static HTML/CSS/JS · Client-side only |
 | **Demo Type** | Fully interactive multi-module AI chat — runs in any browser |
 
@@ -32,13 +32,10 @@ Open the live demo directly in your browser:
 2. Open `index.html` in any browser (Chrome, Firefox, Safari, Edge)
 3. No installation, no server, no build step required
 
-### Connecting the AI
-1. Click the **⚡ Smart Engine** badge in the top-right of the chat
-2. Paste your free **Google Gemini API key** (get one at [aistudio.google.com](https://aistudio.google.com/app/apikey))
-3. Hit **Save Key** — the badge turns green → **Gemini 2.0 Live**
-4. Ask anything! The chatbot now uses a real LLM with full conversation memory.
-
-> **No API key?** The app still works — it falls back to the built-in Smart Engine with pre-engineered responses for all 5 modules.
+### Dual-Engine AI Architecture & Live Prompts
+1. **Live Gemini AI (Default / Pre-configured):** The chatbot connects directly to Google Gemini 3.5 Flash, dynamically generating unique, context-aware answers every time.
+2. **Distinct Prompts for All 5 Modules:** Click the **👁️ Prompt** button in the chat header to view the live system instructions powering each of the 5 modules.
+3. **Engine Toggle:** Click the **⚡ Engine Badge** to toggle between Gemini 3.5 Flash Live AI and the offline Smart Dynamic Engine simulation.
 
 ---
 

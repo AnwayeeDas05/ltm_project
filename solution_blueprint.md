@@ -34,7 +34,7 @@ Over **60% of engineering graduates** in India remain unplaced or underemployed 
 **Name:** Campus Compass  
 **Tagline:** *"Navigating every student's journey from campus to career."*
 
-Campus Compass is a **conversational AI assistant** powered by Google Gemini 2.0 Flash that delivers personalized, real-time career guidance to college students. It integrates 5 intelligent modules covering career navigation, resume analysis, mock interviews, skill gap detection, and placement tracking — all through a natural language chat interface accessible in any browser.
+Campus Compass is a **conversational AI assistant** powered by Google Gemini 3.5 Flash that delivers personalized, real-time career guidance to college students. It integrates 5 intelligent modules covering career navigation, resume analysis, mock interviews, skill gap detection, and placement tracking — all through a natural language chat interface accessible in any browser.
 
 Unlike generic chatbots, Campus Compass:
 - **Adapts** to each student's unique profile (branch, CGPA, skills, interests)
@@ -125,7 +125,7 @@ Unlike generic chatbots, Campus Compass:
 
 | Module | User Inputs | AI Processing | Expected Outputs |
 |--------|-------------|---------------|-----------------|
-| **Career Navigator** | Branch, Year, Skills, Interests | Gemini 2.0 Flash + campus system prompt | Ranked career paths, Phase-wise roadmap, Salary range, Next action |
+| **Career Navigator** | Branch, Year, Skills, Interests | Gemini 3.5 Flash + campus system prompt | Ranked career paths, Phase-wise roadmap, Salary range, Next action |
 | **Resume Analyzer** | Resume text / description, Target role | LLM content scoring + keyword analysis | ATS score estimate, Missing keywords, Section feedback, Improvement tips |
 | **Mock Interview** | Company name, Role, Round type | Multi-turn state machine + Gemini evaluation | Q&A transcript, Per-question scores, Weak areas, Sample answers |
 | **Skill Gap Detector** | Job description / target role, Current skills | LLM gap analysis + resource lookup | Gap matrix, Priority-ordered list, Study resources, Timeline |
@@ -156,7 +156,7 @@ Unlike generic chatbots, Campus Compass:
                            │ HTTPS fetch (Gemini API)
 ┌──────────────────────────▼───────────────────────────────┐
 │                   GOOGLE GEMINI API                      │
-│   Model: gemini-2.0-flash                                │
+│   Model: gemini-3.5-flash-lite                                │
 │   System Prompt: Campus career counselor persona         │
 │   Context: Rolling 10-turn conversation history          │
 │   Config: temp=0.75, maxTokens=1200                      │
@@ -173,11 +173,11 @@ Unlike generic chatbots, Campus Compass:
 
 1. **Zero-backend by design:** The entire application runs client-side. No server, no database, no DevOps required. This makes it instantly deployable and shareable via a single link.
 
-2. **Gemini 2.0 Flash as the AI engine:** Chosen for speed, quality, and the generous free tier. The API is called directly from the browser using the user's own API key — their key, their quota.
+2. **Gemini 3.5 Flash as the AI engine:** Chosen for speed, quality, and the generous free tier. The API is called directly from the browser using the user's own API key — their key, their quota.
 
 3. **Rolling 10-turn conversation memory:** The last 10 message turns are included in every API call, giving Gemini full context to avoid repetitive questions and maintain coherent multi-turn conversations.
 
-4. **Campus-tuned system prompt:** A detailed system prompt instructs Gemini to behave as an experienced Indian campus placement counselor, ensuring responses stay relevant, structured, and motivating.
+4. **5 Domain-Specific System Prompts:** Five distinct, domain-specialized system prompts instruct Gemini (Career Navigator, Resume Analyzer, Mock Interview, Skill Gap Detector, and Placement Tracker) to behave as an experienced Indian campus placement counselor, ensuring responses stay relevant, structured, and motivating.
 
 5. **Smart Engine fallback:** When no API key is provided (or if the API fails), the app falls back to a built-in rules-based engine with pre-engineered responses for all 5 modules — ensuring 100% uptime.
 
@@ -191,7 +191,7 @@ Unlike generic chatbots, Campus Compass:
 |-------|------------|---------------|
 | **Frontend** | HTML5, CSS3, Vanilla JavaScript | No framework needed — keeps the app lightweight, dependency-free, and shareable as a single file |
 | **Fonts** | Google Fonts (Inter, Space Grotesk) | Professional typography without build tooling |
-| **AI Engine** | Google Gemini 2.0 Flash | State-of-the-art conversational reasoning; fast inference; generous free tier; direct browser API access |
+| **AI Engine** | Google Gemini 3.5 Flash | State-of-the-art conversational reasoning; fast inference; generous free tier; direct browser API access |
 | **API Protocol** | Generative Language API (REST/JSON) | Simple fetch() call, no SDK required |
 | **Session State** | JavaScript in-memory | Chat history, interview state machine, module context |
 | **Persistence** | Browser localStorage | API key stored locally; no backend required |
@@ -224,7 +224,7 @@ Unlike generic chatbots, Campus Compass:
 
 ### Phase 1 — Foundation ✅ (Current)
 - 5-module AI chat interface
-- Gemini 2.0 Flash integration with multi-turn memory
+- Gemini 3.5 Flash integration with multi-turn memory
 - Smart Engine offline fallback
 - Static single-file deployment
 
@@ -247,7 +247,7 @@ Unlike generic chatbots, Campus Compass:
 
 ## Summary
 
-Campus Compass is a **fully functional AI career assistant** that runs entirely in the browser — no backend, no installation, no account required. It combines the power of Google Gemini 2.0 Flash with a deep understanding of Indian campus placements to deliver personalized guidance across 5 modules, instantly and for free.
+Campus Compass is a **fully functional AI career assistant** that runs entirely in the browser — no backend, no installation, no account required. It combines the power of Google Gemini 3.5 Flash with a deep understanding of Indian campus placements to deliver personalized guidance across 5 modules, instantly and for free.
 
 > *"Every student deserves a career counselor in their pocket."*
 

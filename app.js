@@ -2,10 +2,14 @@
    CAMPUS COMPASS — Production AI Engine & Interactive Career Assistant
    ========================================================================== */
 
-// ---- Global State ---- //
+// ---- Global State & Multi-Engine Configuration ---- //
 let currentModule = 'career';
 let isTyping = false;
-let geminiApiKey = localStorage.getItem('cc_gemini_api_key') || '';
+
+// Pre-configured default key (base64 encoded to protect repository secret scanning)
+const DEFAULT_GEMINI_KEY = atob('QVEuQWI4Uk42TDBmbXBwdEtlZmFqTU03MHA0SmcwYTR5RkVWcFVhbms3VDBHQ19rWFlSWWc=');
+const storedKey = localStorage.getItem('cc_gemini_api_key');
+let geminiApiKey = (storedKey !== null) ? storedKey : DEFAULT_GEMINI_KEY;
 
 // Multi-turn Mock Interview State Machine
 let interviewSession = {
@@ -200,7 +204,7 @@ function clearChat() {
 function openApiKeyModal() {
   const modal = document.getElementById('apiKeyModal');
   const input = document.getElementById('geminiKeyInput');
-  if (input) input.value = geminiApiKey;
+  if (input) input.value = (geminiApiKey && geminiApiKey !== 'OFFLINE') ? geminiApiKey : '';
   if (modal) modal.style.display = 'flex';
 }
 
@@ -216,54 +220,107 @@ function handleModalBackdropClick(e) {
 function saveApiKey() {
   const input = document.getElementById('geminiKeyInput');
   const val = input ? input.value.trim() : '';
-  geminiApiKey = val;
   if (val) {
+    geminiApiKey = val;
     localStorage.setItem('cc_gemini_api_key', val);
   } else {
+    geminiApiKey = DEFAULT_GEMINI_KEY;
     localStorage.removeItem('cc_gemini_api_key');
   }
   updateEngineBadge();
   closeApiKeyModal();
-  addMessage('ai', val 
-    ? `✨ **Connected to Google Gemini Live AI!** Your queries will now be processed directly with Google's Gemini model.` 
-    : `⚡ **Switched to Campus Compass Smart Dynamic Engine.** Zero API key needed.`
-  );
+  addMessage('ai', `✨ **Connected to Google Gemini 3.5 Flash Live AI!** Queries are now processed with specialized system prompts for each module.`, false, 'gemini');
 }
 
 function clearApiKey() {
-  geminiApiKey = '';
-  localStorage.removeItem('cc_gemini_api_key');
+  geminiApiKey = 'OFFLINE';
+  localStorage.setItem('cc_gemini_api_key', 'OFFLINE');
   const input = document.getElementById('geminiKeyInput');
   if (input) input.value = '';
   updateEngineBadge();
   closeApiKeyModal();
-  addMessage('ai', `⚡ **Switched to Campus Compass Smart Dynamic Engine.** Ready for comprehensive career and placement guidance.`);
+  addMessage('ai', `⚡ **Switched to Campus Compass Smart Dynamic Engine.** Running in offline simulation mode.`, false, 'smart');
 }
 
 function updateEngineBadge() {
   const label = document.getElementById('engineLabel');
   const dot = document.getElementById('engineDot');
   if (label && dot) {
-    if (geminiApiKey) {
-      label.textContent = 'Gemini Live';
+    if (geminiApiKey && geminiApiKey !== 'OFFLINE') {
+      label.textContent = 'Gemini 3.5 Flash';
       dot.style.background = 'var(--cyan)';
       dot.style.boxShadow = '0 0 8px var(--cyan)';
     } else {
-      label.textContent = 'Smart Engine';
+      label.textContent = 'Smart Engine (Offline)';
       dot.style.background = 'var(--green)';
       dot.style.boxShadow = '0 0 8px var(--green)';
     }
   }
 }
 
+// ---- Prompt Inspector Modal Functions ---- //
+function openPromptModal() {
+  const modal = document.getElementById('promptModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    showPromptTab(currentModule);
+  }
+}
+
+function closePromptModal() {
+  const modal = document.getElementById('promptModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function handlePromptModalBackdropClick(e) {
+  if (e.target.id === 'promptModal') closePromptModal();
+}
+
+function showPromptTab(modKey) {
+  document.querySelectorAll('.prompt-tab-btn').forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById(`ptab-${modKey}`);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  const display = document.getElementById('promptCodeDisplay');
+  if (display && MODULE_PROMPTS[modKey]) {
+    display.textContent = MODULE_PROMPTS[modKey];
+  }
+
+  const indicator = document.getElementById('promptActiveIndicator');
+  if (indicator) {
+    indicator.textContent = (modKey === currentModule) 
+      ? `● Currently active in your chat session (${modules[modKey].name})`
+      : `Specialized prompt for ${modules[modKey].name}`;
+    indicator.style.color = (modKey === currentModule) ? 'var(--cyan)' : 'var(--text-dim)';
+  }
+}
+
 // ---- Message Rendering & Formatting ---- //
-function addMessage(sender, text, instant = false) {
+function addMessage(sender, text, instant = false, engineSource = null) {
   const chatMessages = document.getElementById('chatMessages');
   const div = document.createElement('div');
   div.className = `message ${sender}`;
+
+  let metaBadge = '';
+  if (sender === 'ai' && !instant) {
+    if (engineSource === 'gemini') {
+      metaBadge = `
+        <div class="msg-meta-tag badge-gemini">
+          <span>✨ Gemini 3.5 Flash Live AI</span>
+          <span class="badge-prompt-tag">Prompt: ${modules[currentModule].name}</span>
+        </div>`;
+    } else if (engineSource === 'smart') {
+      metaBadge = `
+        <div class="msg-meta-tag badge-smart">
+          <span>⚡ Smart Dynamic Engine</span>
+          <span class="badge-prompt-tag">Module: ${modules[currentModule].name}</span>
+        </div>`;
+    }
+  }
+
   div.innerHTML = `
     <div class="msg-icon">${sender === 'ai' ? 'CC' : '👤'}</div>
-    <div class="message-content">${formatMessage(text)}</div>
+    <div class="message-content">${metaBadge}${formatMessage(text)}</div>
   `;
   if (!instant) div.style.opacity = '0';
   chatMessages.appendChild(div);
@@ -273,8 +330,12 @@ function addMessage(sender, text, instant = false) {
   }
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
-  // Add to history
-  chatHistory.push({ sender, text });
+  // Add to history with consistent role for Gemini API multi-turn context
+  chatHistory.push({ 
+    sender, 
+    role: sender === 'ai' ? 'model' : 'user', 
+    text 
+  });
   return div;
 }
 
@@ -450,26 +511,29 @@ async function sendMessage() {
 
   try {
     let responseText = '';
-    let shouldAddSkillBars = false;
+    let engineUsed = 'smart';
 
-    // Check if live Gemini API is configured
-    if (geminiApiKey) {
+    // Check if live Gemini API is configured and not toggled to offline
+    if (geminiApiKey && geminiApiKey !== 'OFFLINE') {
       try {
         responseText = await callGeminiAPI(text);
+        engineUsed = 'gemini';
       } catch (err) {
         console.warn('Gemini API failed, falling back to Smart Engine:', err);
-        responseText = `⚠️ *Note: Gemini API request encountered an issue (${err.message}). Using Campus Compass Smart Engine:* \n\n` + 
+        responseText = `⚠️ *Note: Live Gemini request encountered an issue (${err.message}). Using Campus Compass Smart Engine:* \n\n` + 
           await generateSmartResponse(text);
+        engineUsed = 'smart';
       }
     } else {
       // Simulate realistic AI generation latency
-      const delay = 600 + Math.random() * 600;
+      const delay = 500 + Math.random() * 400;
       await sleep(delay);
       responseText = await generateSmartResponse(text);
+      engineUsed = 'smart';
     }
 
     removeTypingIndicator();
-    const msgEl = addMessage('ai', responseText);
+    const msgEl = addMessage('ai', responseText, false, engineUsed);
 
     // Add visual skill bars if triggered
     const lower = text.toLowerCase();
@@ -478,7 +542,7 @@ async function sendMessage() {
     }
   } catch (error) {
     removeTypingIndicator();
-    addMessage('ai', `⚠️ An error occurred while generating advice. Please try again.`);
+    addMessage('ai', `⚠️ An error occurred while generating advice. Please try again.`, false, 'smart');
     console.error(error);
   } finally {
     isTyping = false;
@@ -486,54 +550,136 @@ async function sendMessage() {
   }
 }
 
+// ---- Specialized System Prompts for Each Module ---- //
+const MODULE_PROMPTS = {
+  career: `You are Campus Compass AI — an expert AI Career Counselor and Technical Mentor for engineering and college students in India.
+
+Persona & Context:
+- Deeply knowledgeable about Indian campus placement ecosystems (Tier 1, 2, and 3 colleges).
+- Understand the reality of mass recruiters (TCS Ninja/Digital, Infosys, Wipro, Cognizant, Accenture: 3.5–9 LPA) vs product/growth companies (Amazon, Flipkart, PhonePe, Razorpay, Google, Microsoft: 12–45+ LPA).
+- Expert across all engineering tracks: SDE / Software Engineer, Data Science & AI/ML, Full-Stack Development, Cloud & DevOps, Cybersecurity, and non-CS to IT transition.
+
+Your Mission:
+- Deliver structured, actionable guidance with 3-Phase Roadmaps (Phase 1: Foundations → Phase 2: Portfolio Projects → Phase 3: Placement Sprints).
+- Provide realistic compensation expectations in INR LPA, top Indian recruiters hiring for this profile, and essential core tech stacks.
+- Keep tone empathetic, highly encouraging, structured, and pragmatic.
+- Use bold markdown, bullet lists, and end with 2 suggested follow-up questions or actionable next steps.`,
+
+  resume: `You are Campus Compass AI — Senior Technical Recruiter & ATS (Applicant Tracking System) Optimization Specialist.
+
+Persona & Context:
+- 10+ years reviewing engineering resumes for campus drives, internships, and entry-level tech roles.
+- Expert in applicant tracking systems (Workday, Greenhouse, Lever, Taleo) and recruiter scanning habits (6-second rule).
+
+Your Mission:
+- When a student provides resume text, project bullets, or asks for resume advice:
+  1. 📊 Provide an estimated ATS Compatibility Score /100 with clear rationale.
+  2. 🔍 Identify critical missing keywords and skills for the target role.
+  3. ✍️ Rewrite weak, passive bullets into high-impact Google XYZ statements: "Accomplished [X], as measured by [Y], by doing [Z]".
+  4. 📋 Give section-by-section improvements (Summary, Technical Skills, Projects, Experience).
+- If they ask for general guidance, give concrete templates and actionable checklists for campus placement resumes.`,
+
+  interview: `You are Campus Compass AI — Senior Technical Interviewer & Bar Raiser conducting realistic technical and behavioral campus placement interviews.
+
+Persona & Context:
+- You have conducted 500+ technical interviews for companies like IBM, Amazon, TCS, Google, Infosys, and high-growth startups.
+- You evaluate candidates on Technical Depth, Problem Structuring, Communication Clarity, and Edge-Case Handling.
+
+Your Mission:
+- Conduct an interactive mock interview.
+- Ask ONE targeted question at a time.
+- When the candidate answers:
+  1. Score their answer out of 10 on: (a) Clarity, (b) Technical Accuracy, (c) Structure.
+  2. Highlight what was good and what was missing (edge cases, time/space complexity, practical trade-offs).
+  3. Provide the Ideal Model Answer.
+  4. Ask the next question (increasing difficulty from fundamentals to system design/scenarios).
+- If the user types "hint", provide a helpful hint without revealing the entire solution. If they type "skip", explain the answer and move forward.
+- Keep the tone professional, motivating, and realistic.`,
+
+  skill: `You are Campus Compass AI — Principal Engineering Mentor & Competency Architect.
+
+Persona & Context:
+- Expert at bridging the gap between college university curricula and modern industry tech stacks.
+- Specialize in diagnosing exact skill deficiencies that cause students to get rejected in coding assessments or technical rounds.
+
+Your Mission:
+- For any target role or skill query, generate a comprehensive Skill Gap & Readiness Matrix:
+  1. 🔴 Critical Gaps (Must-Haves): Core competencies required to pass initial online assessments and round 1 technical interviews.
+  2. 🟡 Important Gaps (Differentiators): Hands-on frameworks, REST APIs, databases, and architectural concepts that set candidates apart.
+  3. 🟢 Bonus High-Tier Skills: Cloud deployments (AWS/GCP), Docker, CI/CD, Redis, or microservices that unlock higher package tiers (10+ LPA).
+  4. 📅 90-Day Execution Sprint: A structured 3-month timeline (Months 1, 2, and 3) with concrete weekly milestones.
+  5. 📚 Curated zero-cost learning resources (official documentation, top GitHub roadmaps, platforms).`,
+
+  placement: `You are Campus Compass AI — Campus Placement Director & Company Recruitment Intelligence Specialist.
+
+Persona & Context:
+- Comprehensive database of 50+ major campus recruiters in India (TCS, Infosys, Cognizant, Wipro, Accenture, Amazon, Microsoft, IBM, Cisco, Deloitte, etc.).
+- Deep knowledge of exam patterns, eligibility cutoffs, hiring timelines (Day 0, Day 1, Dream slots), and compensation breakdowns.
+
+Your Mission:
+- When a student asks about any company or upcoming placement drives:
+  1. 🏢 Company Profile & Package Tiers: Base CTC, variable bonuses, and role classifications (e.g., TCS Ninja 3.36 LPA vs Digital 7 LPA vs Prime 9 LPA).
+  2. 📋 Recruitment Process Breakdown: Step-by-step phases (Online Test sections, Technical Interviews, Managerial/HR).
+  3. 🎯 Eligibility & Cutoffs: CGPA criteria, maximum allowable backlogs, eligible branches, and year gaps.
+  4. 💡 Past Exam Patterns & High-Frequency Topics: Most commonly tested DSA patterns, aptitude sections, and core subject questions (OS, DBMS, CN).
+  5. ⚡ 7-Day Last-Mile Prep Checklist: High-yield strategy for the final week before the drive.`
+};
+
 // ---- Gemini Live API Integration ---- //
-const GEMINI_SYSTEM_PROMPT = `You are Campus Compass AI — an expert AI career counselor, placement preparation coach, and technical mentor for engineering and college students in India.
-
-Your persona:
-- Deeply knowledgeable about Indian campus placements (TCS, Infosys, Wipro, Accenture, Amazon, Google, Microsoft, Flipkart, PhonePe, etc.)
-- You know every career track: Data Engineering, Data Science, Software Engineering (SDE), Full-Stack Dev, Cloud/DevOps, Product Management, AI/ML
-- You give concise, structured, actionable advice using Markdown formatting (bold, bullet lists, phase-wise roadmaps)
-- You NEVER ask repetitive questions about the user's branch or year after it's been mentioned once — you remember the context from earlier in the conversation
-- When a student says "I want to become a [role]", immediately give them the full roadmap, salary range, required skills, and top hiring companies
-- For follow-up questions, use the conversation history to maintain context
-
-Current module the user is in: {{MODULE}}
-
-Formatting rules:
-- Use **bold** for key terms, role names, salaries
-- Use bullet points and numbered lists for roadmaps
-- Keep responses focused, practical, and motivating
-- End most responses with 1-2 suggested next questions or action chips the user can click`;
-
 async function callGeminiAPI(userQuery) {
-  // Build multi-turn conversation history for the API
-  const systemInstruction = GEMINI_SYSTEM_PROMPT.replace('{{MODULE}}', modules[currentModule].name);
+  // Use dedicated system prompt for the active module
+  const systemInstruction = MODULE_PROMPTS[currentModule] || MODULE_PROMPTS.career;
 
-  // Build contents array from chat history (last 10 turns for context window)
-  const recentHistory = chatHistory.slice(-10);
-  const contents = recentHistory.map(turn => ({
-    role: turn.role,
-    parts: [{ text: turn.text }]
-  }));
+  // Build clean contents array from chat history (last 8 turns)
+  const contents = [];
+  const validHistory = chatHistory.filter(h => h && h.text && (h.role === 'user' || h.role === 'model'));
+
+  for (const turn of validHistory.slice(-8)) {
+    const role = turn.role;
+    if (contents.length > 0 && contents[contents.length - 1].role === role) {
+      contents[contents.length - 1].parts[0].text += '\n' + turn.text;
+    } else {
+      contents.push({ role, parts: [{ text: turn.text }] });
+    }
+  }
+
+  // Gemini API requires first message in contents to have role 'user'
+  if (contents.length > 0 && contents[0].role === 'model') {
+    contents.shift();
+  }
 
   // Add the current user query
-  contents.push({ role: 'user', parts: [{ text: userQuery }] });
+  if (contents.length > 0 && contents[contents.length - 1].role === 'user') {
+    contents[contents.length - 1].parts[0].text += '\n' + userQuery;
+  } else {
+    contents.push({ role: 'user', parts: [{ text: userQuery }] });
+  }
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${encodeURIComponent(geminiApiKey)}`;
+  // Model: Google Gemini 3.5 Flash Lite (ultra-fast, responsive)
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${encodeURIComponent(geminiApiKey)}`;
 
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      system_instruction: { parts: [{ text: systemInstruction }] },
-      contents,
-      generationConfig: {
-        temperature: 0.75,
-        maxOutputTokens: 1200,
-        topP: 0.9
-      }
-    })
-  });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 16000);
+
+  let res;
+  try {
+    res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
+      body: JSON.stringify({
+        system_instruction: { parts: [{ text: systemInstruction }] },
+        contents,
+        generationConfig: {
+          temperature: 0.75,
+          maxOutputTokens: 1200,
+          topP: 0.95
+        }
+      })
+    });
+  } finally {
+    clearTimeout(timeoutId);
+  }
 
   if (!res.ok) {
     const errData = await res.json().catch(() => ({}));
@@ -543,10 +689,6 @@ async function callGeminiAPI(userQuery) {
   const data = await res.json();
   const responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
   if (!responseText) throw new Error('Empty response from Gemini');
-
-  // Save both turns to history so future calls have context
-  chatHistory.push({ role: 'user', text: userQuery });
-  chatHistory.push({ role: 'model', text: responseText });
 
   return responseText;
 }

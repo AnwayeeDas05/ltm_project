@@ -3,13 +3,13 @@
 **Challenge:** AI Assistant for a Real-World Scenario  
 **Domain:** Student Career Guidance + Placement Preparation  
 **Date:** September 2025  
-**AI Engine:** Google Gemini 2.0 Flash (live, multi-turn, system-prompted)
+**AI Engine:** Google Gemini 3.5 Flash (live, multi-turn, specialized system prompts for all 5 modules)
 
 ---
 
 ## Overview
 
-This journal documents every prompt used during the ideation, design, and refinement phases of building **Campus Compass** — an AI assistant that guides college students from career confusion to confident placement readiness. The final system prompts documented here are live in the production app, powering a real Gemini 2.0 Flash integration with multi-turn conversation memory.
+This journal documents every prompt used during the ideation, design, and refinement phases of building **Campus Compass** — an AI assistant that guides college students from career confusion to confident placement readiness. The final system prompts documented here are live in the production app, powering a real Gemini 3.5 Flash integration with multi-turn conversation memory and distinct instructions for all 5 modules.
 
 ---
 
@@ -236,6 +236,26 @@ READINESS SCORE: [X%] with 3-month projection if gaps are addressed.
 
 ---
 
+#### 3.5 — Placement Tracker & Drive Intelligence Module
+
+**Prompt v3.0 (Final)**
+```
+You are Campus Compass AI — Campus Placement Director & Company Recruitment Intelligence Specialist.
+
+Knowledge Base: 50+ Indian and global recruiters (TCS, Infosys, Cognizant, Wipro, Accenture, Amazon, Microsoft, IBM, Cisco, Deloitte, etc.).
+
+When queried about any company or upcoming placement drive:
+1. Recruitment Pattern Breakdown (Aptitude, Coding, Technical Interview, HR)
+2. Eligibility & Cutoff Matrix (CGPA, active backlog rules, allowed branches)
+3. Compensation Structure (Base CTC, bonuses, tier variants e.g. TCS Ninja vs Digital vs Prime)
+4. High-Yield Topics & Company Gotchas from previous recruitment cycles
+5. Actionable 7-day last-mile preparation checklist.
+```
+
+**Learning:** Including company tier breakdowns (like TCS Ninja vs Digital vs Prime) directly matches how campus placement drives function in India, providing realistic guidance that generic career advice omits.
+
+---
+
 ### 🟣 Iteration 4 — Architecture Design Prompts
 
 **Goal:** Generate a viable high-level technical architecture
@@ -289,9 +309,9 @@ CDN, monitoring, and CI/CD pipeline."
 
 ## Final Refined System Prompts (Production-Ready)
 
-All 4 production prompts are documented in Iterations 3.1–3.4 above with their v3.0 final versions.
+All 5 production prompts are documented in Iterations 3.1–3.5 above with their v3.0 final versions.
 
 ---
 
 *Prompt Engineering Journal — Campus Compass | September 2025*  
-*All production system prompts are live in the app, powering Gemini 2.0 Flash with full multi-turn context.*
+*All 5 production system prompts are live in the app, powering Gemini 3.5 Flash with full multi-turn context and instant module switching.*
