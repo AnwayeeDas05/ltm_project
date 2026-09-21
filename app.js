@@ -487,27 +487,50 @@ async function sendMessage() {
 }
 
 // ---- Gemini Live API Integration ---- //
+const GEMINI_SYSTEM_PROMPT = `You are Campus Compass AI — an expert AI career counselor, placement preparation coach, and technical mentor for engineering and college students in India.
+
+Your persona:
+- Deeply knowledgeable about Indian campus placements (TCS, Infosys, Wipro, Accenture, Amazon, Google, Microsoft, Flipkart, PhonePe, etc.)
+- You know every career track: Data Engineering, Data Science, Software Engineering (SDE), Full-Stack Dev, Cloud/DevOps, Product Management, AI/ML
+- You give concise, structured, actionable advice using Markdown formatting (bold, bullet lists, phase-wise roadmaps)
+- You NEVER ask repetitive questions about the user's branch or year after it's been mentioned once — you remember the context from earlier in the conversation
+- When a student says "I want to become a [role]", immediately give them the full roadmap, salary range, required skills, and top hiring companies
+- For follow-up questions, use the conversation history to maintain context
+
+Current module the user is in: {{MODULE}}
+
+Formatting rules:
+- Use **bold** for key terms, role names, salaries
+- Use bullet points and numbered lists for roadmaps
+- Keep responses focused, practical, and motivating
+- End most responses with 1-2 suggested next questions or action chips the user can click`;
+
 async function callGeminiAPI(userQuery) {
-  const systemPrompt = `You are Campus Compass AI, an expert career counselor, placement mentor, and technical mock interview coach for engineering and college students in India.
-Current active module: ${modules[currentModule].name}.
-Provide highly structured, actionable, and encouraging guidance formatted in Markdown.
-If simulating an interview, ask one question at a time, evaluate candidate answers across Clarity, Technical Accuracy, and Structure, provide feedback and model answers.
-Keep answers relevant to campus recruitment, placement drives (TCS, Infosys, IBM, Amazon, Google, etc.), and engineering careers in India.`;
+  // Build multi-turn conversation history for the API
+  const systemInstruction = GEMINI_SYSTEM_PROMPT.replace('{{MODULE}}', modules[currentModule].name);
 
-  const contents = [
-    { role: 'user', parts: [{ text: `${systemPrompt}\n\nUser Question: ${userQuery}` }] }
-  ];
+  // Build contents array from chat history (last 10 turns for context window)
+  const recentHistory = chatHistory.slice(-10);
+  const contents = recentHistory.map(turn => ({
+    role: turn.role,
+    parts: [{ text: turn.text }]
+  }));
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(geminiApiKey)}`;
+  // Add the current user query
+  contents.push({ role: 'user', parts: [{ text: userQuery }] });
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(geminiApiKey)}`;
 
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
+      system_instruction: { parts: [{ text: systemInstruction }] },
       contents,
       generationConfig: {
-        temperature: 0.7,
-        maxOutputTokens: 1024
+        temperature: 0.75,
+        maxOutputTokens: 1200,
+        topP: 0.9
       }
     })
   });
@@ -518,12 +541,19 @@ Keep answers relevant to campus recruitment, placement drives (TCS, Infosys, IBM
   }
 
   const data = await res.json();
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!text) throw new Error('Empty response from model');
-  return text;
+  const responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!responseText) throw new Error('Empty response from Gemini');
+
+  // Save both turns to history so future calls have context
+  chatHistory.push({ role: 'user', text: userQuery });
+  chatHistory.push({ role: 'model', text: responseText });
+
+  return responseText;
 }
 
+
 // ==========================================================================
+
 // CAMPUS COMPASS SMART DYNAMIC ENGINE
 // ==========================================================================
 async function generateSmartResponse(text) {
