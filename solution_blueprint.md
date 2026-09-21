@@ -34,7 +34,7 @@ Over **60% of engineering graduates** in India remain unplaced or underemployed 
 **Name:** Campus Compass  
 **Tagline:** *"Navigating every student's journey from campus to career."*
 
-Campus Compass is a **conversational AI assistant** powered by Google Gemini 3.5 Flash that delivers personalized, real-time career guidance to college students. It integrates 5 intelligent modules covering career navigation, resume analysis, mock interviews, skill gap detection, and placement tracking — all through a natural language chat interface accessible in any browser.
+Campus Compass is a **conversational AI assistant** powered by Google Gemini 3.1 Flash Lite that delivers personalized, real-time career guidance to college students. It integrates 4 intelligent modules covering career navigation, mock interviews, skill gap detection, and placement tracking — all through a natural language chat interface accessible in any browser.
 
 Unlike generic chatbots, Campus Compass:
 - **Adapts** to each student's unique profile (branch, CGPA, skills, interests)
@@ -51,7 +51,7 @@ Unlike generic chatbots, Campus Compass:
 | Persona | Description | Key Needs |
 |---------|-------------|-----------|
 | 🎓 **The Confused 3rd Year** | Has skills but no clear career direction | Career path clarity, roadmap |
-| 📝 **The Pre-Placement Student** | 4th year, under placement pressure | Resume help, interview prep |
+| 📝 **The Pre-Placement Student** | 4th year, under placement pressure | Interview prep, skill gaps |
 | 🔄 **The Career Switcher** | Wants to pivot from ECE/Mech to IT | Skill gap, transition roadmap |
 | 🌱 **The First-Gen Learner** | No family/mentor network for guidance | Complete A-Z career guidance |
 
@@ -69,7 +69,7 @@ Unlike generic chatbots, Campus Compass:
 | ID | Requirement | Priority |
 |----|-------------|----------|
 | FR-01 | System shall generate personalized career path recommendations with roadmaps | Must Have |
-| FR-02 | System shall provide ATS resume analysis and improvement suggestions | Must Have |
+| FR-02 | System shall conduct adaptive mock interview sessions | Must Have |
 | FR-03 | System shall conduct adaptive mock interview sessions for 50+ companies | Must Have |
 | FR-04 | System shall analyze skill gaps and recommend learning resources | Must Have |
 | FR-05 | System shall provide placement drive schedules, eligibility, and prep tips | Must Have |
@@ -94,11 +94,6 @@ Unlike generic chatbots, Campus Compass:
 - **Phase-wise roadmaps** with learning goals and timelines
 - **Career switching support** — specialized paths for non-CS students entering IT
 
-### Module 2: 📝 Resume Intelligence Engine
-- **ATS score estimation** with detailed breakdown by category
-- **Keyword gap analysis** against target role requirements
-- **Section-by-section critique** — summary, experience, projects, skills, education
-- **Quantification tips** — suggests metrics to strengthen achievement bullets
 
 ### Module 3: 🎙️ Mock Interview Coach
 - **Company-specific question banks** (Google, Amazon, TCS, Infosys, Wipro, Zoho, and more)
@@ -126,7 +121,7 @@ Unlike generic chatbots, Campus Compass:
 | Module | User Inputs | AI Processing | Expected Outputs |
 |--------|-------------|---------------|-----------------|
 | **Career Navigator** | Branch, Year, Skills, Interests | Gemini 3.5 Flash + campus system prompt | Ranked career paths, Phase-wise roadmap, Salary range, Next action |
-| **Resume Analyzer** | Resume text / description, Target role | LLM content scoring + keyword analysis | ATS score estimate, Missing keywords, Section feedback, Improvement tips |
+| **Career Navigator** | Branch, Year, Skills, Interests | Gemini 3.1 Flash Lite + campus system prompt | Ranked career paths, Phase-wise roadmap, Salary range, Next action |
 | **Mock Interview** | Company name, Role, Round type | Multi-turn state machine + Gemini evaluation | Q&A transcript, Per-question scores, Weak areas, Sample answers |
 | **Skill Gap Detector** | Job description / target role, Current skills | LLM gap analysis + resource lookup | Gap matrix, Priority-ordered list, Study resources, Timeline |
 | **Placement Tracker** | Company name / query | Drive knowledge base + eligibility filter | Drive schedule, Eligibility status, Prep tips, Application advice |
@@ -177,7 +172,7 @@ Unlike generic chatbots, Campus Compass:
 
 3. **Rolling 10-turn conversation memory:** The last 10 message turns are included in every API call, giving Gemini full context to avoid repetitive questions and maintain coherent multi-turn conversations.
 
-4. **5 Domain-Specific System Prompts:** Five distinct, domain-specialized system prompts instruct Gemini (Career Navigator, Resume Analyzer, Mock Interview, Skill Gap Detector, and Placement Tracker) to behave as an experienced Indian campus placement counselor, ensuring responses stay relevant, structured, and motivating.
+4. **4 Domain-Specific System Prompts:** Four distinct, domain-specialized system prompts instruct Gemini (Career Navigator, Mock Interview, Skill Gap Detector, and Placement Tracker) to behave as an experienced Indian campus placement counselor, ensuring responses stay relevant, structured, and motivating.
 
 5. **Smart Engine fallback:** When no API key is provided (or if the API fails), the app falls back to a built-in rules-based engine with pre-engineered responses for all 5 modules — ensuring 100% uptime.
 
@@ -207,7 +202,7 @@ Unlike generic chatbots, Campus Compass:
 |---------|------------------|
 | Career Clarity | Clear career direction within 1–2 conversations |
 | Interview Readiness | Full mock interview with scored feedback in < 10 min |
-| Resume Improvement | Instant ATS analysis without waiting for a counselor |
+| Interview Practice | On-demand mock sessions instead of scheduling with a counselor |
 | 24/7 Availability | Zero waiting time vs. 3–5 days for appointments |
 | Accessibility | Works on any device with a browser — no app install |
 
@@ -230,7 +225,7 @@ Unlike generic chatbots, Campus Compass:
 
 ### Phase 2 — Intelligence Layer
 - **Voice interview practice** — speech recognition + pronunciation feedback
-- **Resume PDF upload** — parse and analyze actual resume files
+- **Voice-based mock interviews** — natural spoken practice sessions
 - **Personalized learning tracker** — save progress across sessions
 
 ### Phase 3 — Platform

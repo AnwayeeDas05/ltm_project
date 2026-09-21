@@ -51,27 +51,7 @@ I can help you:
 Tell me your branch, year of college, or the career you're curious about — let's chart your roadmap! 🚀`
   },
 
-  resume: {
-    name: 'Resume Analyzer',
-    icon: '📝',
-    statusLabel: '● Active — Resume Analyzer Mode',
-    quickPrompts: [
-      'How do I improve my ATS score?',
-      'Review my project bullet points',
-      'Write a strong summary for SDE fresher',
-      'What keywords should I include for Full-Stack?',
-      'Check my resume format for placements'
-    ],
-    greeting: `📝 Welcome to the **Resume Intelligence Engine**!
 
-I can help you:
-- 🎯 **Calculate your estimated ATS Score** and parsability grade
-- 🔍 **Identify keyword gaps** for specific roles & job descriptions
-- ✍️ **Rewrite weak bullet points** into high-impact Google XYZ achievements
-- 📊 **Craft punchy summaries** tailored for campus placements
-
-Paste your resume snippet, project bullet points, or target role below for an instant audit!`
-  },
 
   interview: {
     name: 'Mock Interview',
@@ -229,7 +209,7 @@ function saveApiKey() {
   }
   updateEngineBadge();
   closeApiKeyModal();
-  addMessage('ai', `✨ **Connected to Google Gemini 3.1 Flash Live AI!** Queries are now processed with specialized system prompts for each module.`, false, 'gemini');
+  addMessage('ai', `✨ **Connected to Google Gemini 3.1 Flash Lite Live AI!** Queries are now processed with specialized system prompts for each module.`, false, 'gemini');
 }
 
 function clearApiKey() {
@@ -247,7 +227,7 @@ function updateEngineBadge() {
   const dot = document.getElementById('engineDot');
   if (label && dot) {
     if (geminiApiKey && geminiApiKey !== 'OFFLINE') {
-      label.textContent = 'Gemini 3.1 Flash';
+      label.textContent = 'Gemini 3.1 Flash Lite';
       dot.style.background = 'var(--cyan)';
       dot.style.boxShadow = '0 0 8px var(--cyan)';
     } else {
@@ -288,7 +268,7 @@ function showPromptTab(modKey) {
 
   const indicator = document.getElementById('promptActiveIndicator');
   if (indicator) {
-    indicator.textContent = (modKey === currentModule) 
+    indicator.textContent = (modKey === currentModule)
       ? `● Currently active in your chat session (${modules[modKey].name})`
       : `Specialized prompt for ${modules[modKey].name}`;
     indicator.style.color = (modKey === currentModule) ? 'var(--cyan)' : 'var(--text-dim)';
@@ -306,7 +286,7 @@ function addMessage(sender, text, instant = false, engineSource = null) {
     if (engineSource === 'gemini') {
       metaBadge = `
         <div class="msg-meta-tag badge-gemini">
-          <span>✨ Gemini 3.1 Flash Live AI</span>
+          <span>✨ Gemini 3.1 Flash Lite Live AI</span>
           <span class="badge-prompt-tag">Prompt: ${modules[currentModule].name}</span>
         </div>`;
     } else if (engineSource === 'smart') {
@@ -331,10 +311,10 @@ function addMessage(sender, text, instant = false, engineSource = null) {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   // Add to history with consistent role for Gemini API multi-turn context
-  chatHistory.push({ 
-    sender, 
-    role: sender === 'ai' ? 'model' : 'user', 
-    text 
+  chatHistory.push({
+    sender,
+    role: sender === 'ai' ? 'model' : 'user',
+    text
   });
   return div;
 }
@@ -520,7 +500,7 @@ async function sendMessage() {
         engineUsed = 'gemini';
       } catch (err) {
         console.warn('Gemini API failed, falling back to Smart Engine:', err);
-        responseText = `⚠️ *Note: Live Gemini request encountered an issue (${err.message}). Using Campus Compass Smart Engine:* \n\n` + 
+        responseText = `⚠️ *Note: Live Gemini request encountered an issue (${err.message}). Using Campus Compass Smart Engine:* \n\n` +
           await generateSmartResponse(text);
         engineUsed = 'smart';
       }
@@ -565,19 +545,6 @@ Your Mission:
 - Keep tone empathetic, highly encouraging, structured, and pragmatic.
 - Use bold markdown, bullet lists, and end with 2 suggested follow-up questions or actionable next steps.`,
 
-  resume: `You are Campus Compass AI — Senior Technical Recruiter & ATS (Applicant Tracking System) Optimization Specialist.
-
-Persona & Context:
-- 10+ years reviewing engineering resumes for campus drives, internships, and entry-level tech roles.
-- Expert in applicant tracking systems (Workday, Greenhouse, Lever, Taleo) and recruiter scanning habits (6-second rule).
-
-Your Mission:
-- When a student provides resume text, project bullets, or asks for resume advice:
-  1. 📊 Provide an estimated ATS Compatibility Score /100 with clear rationale.
-  2. 🔍 Identify critical missing keywords and skills for the target role.
-  3. ✍️ Rewrite weak, passive bullets into high-impact Google XYZ statements: "Accomplished [X], as measured by [Y], by doing [Z]".
-  4. 📋 Give section-by-section improvements (Summary, Technical Skills, Projects, Experience).
-- If they ask for general guidance, give concrete templates and actionable checklists for campus placement resumes.`,
 
   interview: `You are Campus Compass AI — Senior Technical Interviewer & Bar Raiser conducting realistic technical and behavioral campus placement interviews.
 
@@ -655,8 +622,8 @@ async function callGeminiAPI(userQuery) {
     contents.push({ role: 'user', parts: [{ text: userQuery }] });
   }
 
-  // Model: Google Gemini 3.1 Flash Lite
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${encodeURIComponent(geminiApiKey)}`;
+  // Model: Google Gemini 3.1 Flash
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash:generateContent?key=${encodeURIComponent(geminiApiKey)}`;
 
   let res;
   let retries = 3;
@@ -720,9 +687,7 @@ async function generateSmartResponse(text) {
   if (currentModule === 'interview' || lower.includes('interview') || interviewSession.active) {
     return handleMockInterview(text, lower);
   }
-  if (currentModule === 'resume' || lower.includes('resume') || lower.includes('ats') || lower.includes('cv')) {
-    return handleResumeAnalyzer(text, lower);
-  }
+
   if (currentModule === 'skill' || lower.includes('skill') || lower.includes('learn') || lower.includes('roadmap')) {
     return handleSkillGapDetector(text, lower);
   }
@@ -1208,65 +1173,7 @@ Based on current tech recruitment trends in India:
 Tell me your branch, year, and current primary language (e.g. Java, Python, C++) to generate your exact milestones!`;
 }
 
-// --------------------------------------------------------------------------
-// 3. RESUME ANALYZER ENGINE
-// --------------------------------------------------------------------------
-function handleResumeAnalyzer(text, lower) {
-  // Check if user pasted resume text or project bullet points
-  const hasResumeContent = lower.includes('built') || lower.includes('developed') || lower.includes('worked on') ||
-    lower.includes('project') || lower.includes('experience') || lower.includes('skills') || text.length > 80;
 
-  if (hasResumeContent && !lower.includes('how do i') && !lower.includes('tips')) {
-    // Perform heuristic ATS audit
-    const hasNumbers = /\d+%|\d+\+|\d+k|\d+ms|\d+ users/i.test(text);
-    const hasActionVerbs = /spearheaded|architected|engineered|developed|optimized|implemented|orchestrated/i.test(text);
-    const hasWeakVerbs = /responsible for|helped in|worked on|learned/i.test(text);
-
-    let score = 65;
-    if (hasNumbers) score += 15;
-    if (hasActionVerbs) score += 12;
-    if (!hasWeakVerbs) score += 8;
-
-    return `📋 **Instant ATS Resume Audit & Critique**
-
-<div class="score-badge-card">
-  <div style="font-size:0.85rem;color:var(--text-muted);">Estimated ATS Compatibility Score:</div>
-  <div style="font-size:1.8rem;font-weight:800;color:${score > 75 ? 'var(--green)' : 'var(--orange)'};">${score} / 100</div>
-  <div style="font-size:0.85rem;margin-top:4px;">${score > 75 ? '🟢 Solid foundation — minor polish needed' : '🟡 Needs metric quantification & strong action verbs'}</div>
-</div>
-
-### 🔍 Section-by-Section Feedback:
-- ${hasActionVerbs ? '✅ **Action Verbs:** Strong power verbs detected.' : '⚠️ **Action Verbs:** Too passive. Replace phrases like *"worked on"* with *"Engineered"*, *"Architected"*, or *"Optimized"*.'}
-- ${hasNumbers ? '✅ **Quantified Impact:** Good use of metrics and measurable results.' : '❌ **Missing Quantifiable Impact:** Every bullet point must have a number (e.g., *"reduced latency by 35%"*, *"serving 1,200+ users"*).'}
-- 🎯 **ATS Formatting:** Keep single-column layout, standard headers (Experience, Projects, Technical Skills, Education), and zero tables/graphics.
-
-### ✍️ High-Impact XYZ Rewrite (Google Standard):
-**Formula:** *"Accomplished [X], as measured by [Y], by doing [Z]"*
-
-> **Before (Weak):**
-> *"Worked on a full stack web app for college student placement management."*
->
-> **After (8x Higher Interview Callback Rate):**
-> *"Engineered a responsive Placement Management Portal utilizing React, Node.js, and PostgreSQL, automating drive notifications for 850+ final-year students and reducing registration processing time by 40%."*
-
-*Paste another project or resume section to get it rewritten!*`;
-  }
-
-  // General ATS tips
-  return `📊 **ATS (Applicant Tracking System) Master Rules for Campus Placements:**
-
-**1. The 5 Cardinal ATS Rules:**
-- ✅ **Single-Column Layout:** Multi-column tables confuse ATS parsers (like Workday, Taleo).
-- ✅ **Standard Section Headers:** Use *"Education"*, *"Technical Skills"*, *"Projects"*, *"Work Experience"*. Avoid fancy headings like *"My Journey"*.
-- ✅ **Exact Keywords:** If the JD asks for *"PostgreSQL, REST APIs, Docker"*, include those exact keywords in your skills & projects.
-- ✅ **Quantify Everything:** Use numbers, percentages, user counts, and throughput.
-- ❌ **No Text in Images:** Never put contact info or skills in graphic icons or images.
-
-**2. High-Converting Professional Summary Template:**
-> *"Goal-driven Computer Science graduate skilled in Full-Stack development (React, Node.js, Python) and relational database design. Built 3 production-grade applications serving 500+ active users. Winner of Smart India Hackathon 2024. Seeking SDE-1 role at product engineering firms to architect scalable cloud software."*
-
-*Want me to critique your resume summary or bullet points? Paste them below!*`;
-}
 
 // --------------------------------------------------------------------------
 // 4. SKILL GAP DETECTOR ENGINE

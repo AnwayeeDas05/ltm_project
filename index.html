@@ -64,7 +64,7 @@
       </h1>
       <p class="hero-subtitle">
         Campus Compass guides students from confusion to clarity — with personalized career roadmaps, 
-        real-time placement prep, resume critique, mock interviews, and skill gap analysis. 
+        real-time placement prep, mock interviews, and skill gap analysis. 
         All in one intelligent assistant.
       </p>
       <div class="hero-actions">
@@ -78,7 +78,7 @@
       </div>
       <div class="hero-stats">
         <div class="stat-item">
-          <span class="stat-value">6</span>
+          <span class="stat-value">5</span>
           <span class="stat-label">Core AI Modules</span>
         </div>
         <div class="stat-divider"></div>
@@ -131,7 +131,7 @@
       <div class="section-header">
         <span class="section-tag">Core Capabilities</span>
         <h2 class="section-title">Everything a Student Needs,<br/><span class="gradient-text">Powered by AI</span></h2>
-        <p class="section-subtitle">Six intelligent modules working together to transform your campus-to-career journey</p>
+        <p class="section-subtitle">Five intelligent modules working together to transform your campus-to-career journey</p>
       </div>
       <div class="features-grid">
         <div class="feature-card card-accent-purple" data-module="career">
@@ -145,17 +145,7 @@
           </div>
           <div class="feature-arrow">→</div>
         </div>
-        <div class="feature-card card-accent-blue" data-module="resume">
-          <div class="feature-icon">📝</div>
-          <h3>Resume Analyzer & Builder</h3>
-          <p>Upload your resume for instant AI critique. Get ATS optimization tips, content improvements, and role-specific tailoring suggestions.</p>
-          <div class="feature-tags">
-            <span class="tag">ATS Score</span>
-            <span class="tag">Auto-Fix</span>
-            <span class="tag">Templates</span>
-          </div>
-          <div class="feature-arrow">→</div>
-        </div>
+
         <div class="feature-card card-accent-cyan" data-module="interview">
           <div class="feature-icon">🎙️</div>
           <h3>Mock Interview Coach</h3>
@@ -223,13 +213,7 @@
                 <span class="module-desc">Plan your path</span>
               </div>
             </button>
-            <button class="module-btn" data-module="resume" onclick="switchModule('resume', this)">
-              <span class="module-icon">📝</span>
-              <div>
-                <span class="module-name">Resume Analyzer</span>
-                <span class="module-desc">Optimize your CV</span>
-              </div>
-            </button>
+
             <button class="module-btn" data-module="interview" onclick="switchModule('interview', this)">
               <span class="module-icon">🎙️</span>
               <div>
@@ -311,7 +295,7 @@
       <div class="section-header">
         <span class="section-tag">System Design</span>
         <h2 class="section-title">How It <span class="gradient-text">Works</span></h2>
-        <p class="section-subtitle">A zero-backend, client-side architecture powered by Gemini 3.1 Flash</p>
+        <p class="section-subtitle">A zero-backend, client-side architecture powered by Gemini 3.1 Flash Lite</p>
       </div>
       <div class="arch-diagram">
         <div class="arch-layer layer-users">
@@ -336,7 +320,7 @@
         <div class="arch-layer layer-ai">
           <div class="layer-label">&#x1F916; AI Engine</div>
           <div class="arch-nodes">
-            <div class="arch-node ai-node">Gemini 3.1 Flash<br/><small>Google LLM</small></div>
+            <div class="arch-node ai-node">Gemini 3.1 Flash Lite<br/><small>Google LLM</small></div>
             <div class="arch-node ai-node">Campus System Prompt<br/><small>Career persona</small></div>
             <div class="arch-node ai-node">10-turn Memory<br/><small>Multi-turn context</small></div>
           </div>
@@ -366,7 +350,7 @@
         <div class="tech-category">
           <h4>&#x1F916; AI / LLM</h4>
           <div class="tech-tags">
-            <span class="tech-tag">Gemini 3.1 Flash</span>
+            <span class="tech-tag">Gemini 3.1 Flash Lite</span>
             <span class="tech-tag">Generative Language API</span>
             <span class="tech-tag">Multi-turn Context</span>
           </div>
@@ -458,12 +442,7 @@
               <p>Student inputs interests and academic profile → AI generates multiple career paths with probability scores and market demand analysis.</p>
               <div class="uc-actors">Actor: Student · System: Career Engine</div>
             </div>
-            <div class="uc-card">
-              <div class="uc-num">UC-02</div>
-              <h4>Resume Intelligence</h4>
-              <p>Student uploads resume → AI scores it against ATS, suggests improvements, generates role-specific versions, and estimates shortlist probability.</p>
-              <div class="uc-actors">Actor: Student · System: NLP Resume Engine</div>
-            </div>
+
             <div class="uc-card">
               <div class="uc-num">UC-03</div>
               <h4>Adaptive Mock Interviews</h4>
@@ -510,12 +489,7 @@
                   <td>LLM analysis + Market trend matching + Career graph traversal</td>
                   <td>Ranked career paths, Roadmap steps, Timeline, Resource links</td>
                 </tr>
-                <tr>
-                  <td><span class="io-badge blue">Resume Analyzer</span></td>
-                  <td>Resume PDF/DOCX, Target Role, JD (optional)</td>
-                  <td>NLP parsing + ATS keyword matching + Content scoring</td>
-                  <td>ATS score, Keyword gaps, Improvement suggestions, Optimized sections</td>
-                </tr>
+
                 <tr>
                   <td><span class="io-badge cyan">Mock Interview</span></td>
                   <td>Company name, Role, Experience level</td>
@@ -582,7 +556,7 @@
               <div class="timeline-marker phase1">Phase 1</div>
               <div class="timeline-content">
                 <h4>Q1 2025 — Foundation</h4>
-                <p>Core chat interface, Career Navigator, Resume Analyzer MVP. Single college pilot with 500 students.</p>
+                <p>Core chat interface, Career Navigator MVP. Single college pilot with 500 students.</p>
                 <div class="timeline-tags">
                   <span>MVP</span><span>Pilot</span><span>Feedback Loop</span>
                 </div>
@@ -657,29 +631,7 @@ Formatting: Clear markdown, bold metrics, bulleted checklists, and 2 contextual 
           </div>
         </div>
 
-        <!-- Module 2: Resume Analyzer -->
-        <div class="journey-step">
-          <div class="journey-num">02</div>
-          <div class="journey-content">
-            <h4>📝 Module 2: Resume Analyzer & ATS Intelligence Prompt</h4>
-            <div class="prompt-box v1">
-              <div class="prompt-version">v1.0 — Raw Ideation</div>
-              <code>"Review this student resume bullet and tell me what is wrong."</code>
-            </div>
-            <div class="iteration-arrow">↓ Refinement: Added Google XYZ formula, ATS keyword gap detection, quantifiable scoring</div>
-            <div class="prompt-box v3">
-              <div class="prompt-version">v3.0 — Production Live System Prompt</div>
-              <code>"You are Campus Compass AI — Senior Technical Recruiter & ATS Optimization Specialist.
-Goal: Audit student resume snippets, project descriptions, and skill profiles against top tech recruiting standards.
-Provide:
-1. ATS Compatibility Score /100 with clear justification
-2. Critical Missing Keywords for the target role
-3. 'Before vs After' Bullet Transformation using Google's XYZ formula: 'Accomplished [X], as measured by [Y], by doing [Z]'
-4. Section-by-section punchy recommendations (Projects, Technical Skills, Summary)
-Keep tone constructive, high-precision, and directly applicable to campus placement screenings."</code>
-            </div>
-          </div>
-        </div>
+
 
         <!-- Module 3: Mock Interview -->
         <div class="journey-step">
@@ -800,7 +752,7 @@ When queried about any company or upcoming drive:
           Campus Compass features dual-engine architecture:
         </p>
         <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:14px;font-size:0.82rem;">
-          <div style="margin-bottom:6px;">✨ <strong>Gemini 3.1 Flash (Live AI):</strong> Direct unbounded LLM generation with tailored prompt instructions for all 5 modules.</div>
+          <div style="margin-bottom:6px;">✨ <strong>Gemini 3.1 Flash Lite (Live AI):</strong> Direct unbounded LLM generation with tailored prompt instructions for all 4 modules.</div>
           <div>⚡ <strong>Smart Dynamic Engine:</strong> Zero-API-key client-side simulation with 50+ company databases & roadmaps.</div>
         </div>
         <label style="font-size:0.75rem;font-weight:600;text-transform:uppercase;color:var(--cyan);letter-spacing:0.5px;">Google Gemini API Key</label>
@@ -828,11 +780,11 @@ When queried about any company or upcoming drive:
       </div>
       <div class="modal-body">
         <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">
-          Campus Compass uses <strong>5 distinct, domain-specific system prompts</strong> tailored for each module. Select any tab below to inspect the live instructions sent to the LLM:
+          Campus Compass uses <strong>4 distinct, domain-specific system prompts</strong> tailored for each module. Select any tab below to inspect the live instructions sent to the LLM:
         </p>
         <div class="prompt-modal-tabs">
           <button class="prompt-tab-btn" id="ptab-career" onclick="showPromptTab('career')">🧭 Career Navigator</button>
-          <button class="prompt-tab-btn" id="ptab-resume" onclick="showPromptTab('resume')">📝 Resume</button>
+
           <button class="prompt-tab-btn" id="ptab-interview" onclick="showPromptTab('interview')">🎙️ Interview</button>
           <button class="prompt-tab-btn" id="ptab-skill" onclick="showPromptTab('skill')">⚡ Skill Gap</button>
           <button class="prompt-tab-btn" id="ptab-placement" onclick="showPromptTab('placement')">🏢 Placement</button>

@@ -91,10 +91,9 @@ in India. Include: use cases, key features, and who benefits from each feature."
 ```
 "You are a product manager at an EdTech startup. Design an AI-powered student 
 career guidance system for engineering colleges in India. The system must address 
-these problems: (1) career path confusion, (2) poor ATS resume quality, 
-(3) inadequate placement preparation, (4) inaccessible mentorship.
+these problems: (1) career path confusion, (2) inadequate placement preparation, (3) inaccessible mentorship.
 
-For each of 6 core modules, provide:
+For each of 4 core modules, provide:
 - Use Case ID and Name
 - Primary Actor and Secondary Actors
 - Preconditions
@@ -140,41 +139,8 @@ Always end with an actionable next step the student can do TODAY.
 
 ---
 
-#### 3.2 — Resume Analyzer Module
 
-**Prompt v3.0 (Initial)**
-```
-"Review this resume and give feedback"
-```
-**Observation:** ❌ Gave generic praise + minor suggestions. Useless.
-
-**Prompt v3.1 (Final)**
-```
-You are an ATS expert and senior HR recruiter with 10+ years of experience 
-at top Indian tech companies (TCS, Infosys, Wipkart, Amazon India).
-
-Analyze the provided resume for the role: [TARGET_ROLE] at [COMPANY_TYPE].
-
-Provide your analysis in this exact structure:
-1. ATS COMPATIBILITY SCORE: [X/100] with explanation
-2. CRITICAL MISSING KEYWORDS: [List top 5 terms from typical JDs for this role]
-3. SECTION ANALYSIS:
-   - Summary: [Current issues + improved version]
-   - Experience/Projects: [Quantification opportunities]
-   - Skills: [Outdated terms to remove, trending terms to add]
-   - Education: [Formatting improvements]
-4. SHORTLIST PROBABILITY: [X%] based on current resume strength
-5. ONE POWER MOVE: The single highest-impact change to make TODAY
-
-Be specific and empathetic — remember this student has limited experience.
-Do not use vague terms like "make it better". Give exact rewrites.
-```
-
-**Learning:** Providing the exact output structure via numbered sections eliminated all vagueness. Specifying the reviewer persona ("10+ years, top companies") anchors the quality expectation. The "ONE POWER MOVE" instruction ensures the student always has a clear next action.
-
----
-
-#### 3.3 — Mock Interview Module
+#### 3.2 — Mock Interview Module
 
 **Prompt v3.0 (Final)**
 ```

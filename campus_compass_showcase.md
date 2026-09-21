@@ -13,9 +13,9 @@
 | **AI Assistant Name** | Campus Compass |
 | **Tagline** | *"Navigating every student's journey from campus to career"* |
 | **Problem Solved** | 60%+ engineering graduates unplaced due to career/prep gaps |
-| **AI Modules** | 5 (Career Navigator, Resume Analyzer, Mock Interview, Skill Gap Detector, Placement Tracker) |
+| **AI Modules** | 4 (Career Navigator, Mock Interview, Skill Gap Detector, Placement Tracker) |
 | **Target Users** | UG/PG engineering students, 1st–4th year |
-| **AI Engine** | Google Gemini 3.5 Flash (live LLM with specialized prompts for all 5 modules) |
+| **AI Engine** | Google Gemini 3.1 Flash Lite (live LLM with specialized prompts for all 4 modules) |
 | **Architecture** | Zero-backend · Static HTML/CSS/JS · Client-side only |
 | **Demo Type** | Fully interactive multi-module AI chat — runs in any browser |
 
@@ -23,19 +23,14 @@
 
 ## 🚀 How to Run
 
-### Option A — GitHub Pages (easiest, share this link)
-Open the live demo directly in your browser:  
-**https://anwayeedas05.github.io/ltm_project/**
-
-### Option B — Local file
-1. Clone or download the repo
-2. Open `index.html` in any browser (Chrome, Firefox, Safari, Edge)
-3. No installation, no server, no build step required
+1. Extract the provided ZIP file.
+2. Open `index.html` in any browser (Chrome, Firefox, Safari, Edge).
+3. No installation, no server, no build step required!
 
 ### Dual-Engine AI Architecture & Live Prompts
-1. **Live Gemini AI (Default / Pre-configured):** The chatbot connects directly to Google Gemini 3.5 Flash, dynamically generating unique, context-aware answers every time.
+1. **Live Gemini AI (Default / Pre-configured):** The chatbot connects directly to Google Gemini 3.1 Flash Lite, dynamically generating unique, context-aware answers every time.
 2. **Distinct Prompts for All 5 Modules:** Click the **👁️ Prompt** button in the chat header to view the live system instructions powering each of the 5 modules.
-3. **Engine Toggle:** Click the **⚡ Engine Badge** to toggle between Gemini 3.5 Flash Live AI and the offline Smart Dynamic Engine simulation.
+3. **Engine Toggle:** Click the **⚡ Engine Badge** to toggle between Gemini 3.1 Flash Lite Live AI and the offline Smart Dynamic Engine simulation.
 
 ---
 
