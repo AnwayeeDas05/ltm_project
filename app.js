@@ -519,7 +519,7 @@ async function callGeminiAPI(userQuery) {
   // Add the current user query
   contents.push({ role: 'user', parts: [{ text: userQuery }] });
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(geminiApiKey)}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${encodeURIComponent(geminiApiKey)}`;
 
   const res = await fetch(url, {
     method: 'POST',
