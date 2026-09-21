@@ -269,9 +269,15 @@
                 <span class="chat-status" id="chatStatus">● Active — Career Navigator Mode</span>
               </div>
             </div>
-            <button class="clear-chat-btn" onclick="clearChat()" title="Clear Chat">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <button class="engine-badge-btn" id="engineBadgeBtn" onclick="openApiKeyModal()" title="AI Engine Settings">
+                <span class="engine-dot" id="engineDot"></span>
+                <span id="engineLabel">Smart Engine</span>
+              </button>
+              <button class="clear-chat-btn" onclick="clearChat()" title="Clear Chat">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
           </div>
           <div class="chat-messages" id="chatMessages">
             <!-- Messages inserted by JS -->
@@ -731,6 +737,33 @@
       </div>
     </div>
   </footer>
+
+  <!-- AI Engine Modal (Optional Gemini Key) -->
+  <div class="modal-backdrop" id="apiKeyModal" style="display:none;" onclick="handleModalBackdropClick(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>⚡ AI Engine Settings</h3>
+        <button class="modal-close" onclick="closeApiKeyModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.88rem;color:var(--text);margin-bottom:8px;">
+          Campus Compass runs on an advanced <strong>Smart Dynamic Engine</strong> with rich knowledge of 50+ companies, placement patterns, roadmaps, and adaptive mock interviews with zero setup.
+        </p>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">
+          Want unbounded live LLM generation? Enter a free <strong>Google Gemini API Key</strong> below:
+        </p>
+        <label style="font-size:0.75rem;font-weight:600;text-transform:uppercase;color:var(--cyan);letter-spacing:0.5px;">Google Gemini API Key</label>
+        <input type="password" id="geminiKeyInput" placeholder="AIzaSy..." class="modal-input" />
+        <div style="display:flex;gap:8px;margin-top:16px;justify-content:flex-end;">
+          <button class="btn-secondary" style="padding:8px 14px;font-size:0.8rem;" onclick="clearApiKey()">Use Smart Engine</button>
+          <button class="btn-primary" style="padding:8px 16px;font-size:0.8rem;" onclick="saveApiKey()">Save Key</button>
+        </div>
+        <p style="font-size:0.74rem;color:var(--text-dim);margin-top:14px;line-height:1.4;">
+          🔒 Stored locally in your browser only. Get a free API key instantly at <a href="https://aistudio.google.com" target="_blank" style="color:var(--cyan);text-decoration:underline;">aistudio.google.com</a>.
+        </p>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
